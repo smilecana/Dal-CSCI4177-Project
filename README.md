@@ -1,3 +1,13 @@
+# CSCI4177 Project
+
+* *Date Created*: 24 May 2021
+* *Last Modification Date*: 24 May 2021
+* *URL*: https://github.com/Aref19a/4177-project
+
+## Authors
+
+* [HanaPark](hn946002@dal.ca) - *(contributor)*
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
@@ -68,3 +78,9 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `yarn build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+## Deployment
+
+By clicking the button below you can signup for Heroku and deploy a working copy of MEANJS to the cloud without having to do the steps above.
+
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://csci4177-project.herokuapp.com/)
