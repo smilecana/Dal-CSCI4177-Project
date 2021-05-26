@@ -7,7 +7,7 @@
 ## Authors
 
 * [HanaPark](hn946002@dal.ca) - *(contributor)*
-* [Ty Fetinko] (ty667216@dal.ca) - *(contributor)*
+* [Ty Fetinko](ty667216@dal.ca) - *(contributor)*
  
 # Getting Started with Create React App
 
