@@ -1,20 +1,13 @@
 require('./database');
 const express = require('express');
 const bodyParser = require('body-parser');
-const cors = require('cors');
 const app = express();
-//middleware
-app.use(bodyParser.json());
-app.use(cors());
-
+const routes = require('./routes');
 const port = process.env.PORT || 5000;
-//models
-const users = require('./api/user');
 
 //middleware
 app.use(bodyParser.json());
-app.use(cors());
-app.use('/api/*', users);
+app.use(routes);
 
 
 // Serve up static assets (usually on heroku)
