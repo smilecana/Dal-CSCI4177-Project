@@ -1,17 +1,12 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState} from 'react'
+import { useHistory } from "react-router-dom"
 import axios from 'axios';
 const SignIn =  () => {
-    const [users, setUsers] = useState([]);
+    let history = useHistory();
     const [password, setPassword] = useState("");
     const [email, setEmail] = useState("");
-    useEffect(() => {
-        axios
-            .get("/api/users")
-            .then(response => {
-                return setUsers(response.data)
-            });
-    }, []);
-    function submitForm() {
+    function submitForm(e) {
+        e.preventDefault();
         if (password === "") {
             alert("Please fill the username field");
             return;
@@ -27,7 +22,7 @@ const SignIn =  () => {
             })
             .then(function () {
                 alert("Account created successfully");
-                window.location.reload();
+                history.push('/users');
             })
             .catch(function () {
                 alert("Could not creat account. Please try again");
@@ -39,18 +34,15 @@ const SignIn =  () => {
                 <input
                     onChange={(e) => setEmail(e.target.value)}
                     type="text"
-                    placeholder="Enter your username"
+                    placeholder="Enter your email address"
                 />
                 <input
                     onChange={(e) => setPassword(e.target.value)}
                     type="text"
-                    placeholder="Enter your email address"
+                    placeholder="Enter your password"
                 />
                 <input type="submit" />
             </form>
-            <ul>
-                {users && users.map(item => <li key={item.email}> {item.email} </li> )}
-            </ul>
         </>
     )
 };

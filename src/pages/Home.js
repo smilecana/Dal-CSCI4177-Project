@@ -22,11 +22,14 @@ const Home = () => {
                                     <CardBody className="text-center">
                                         <div>
                                             <h2>Home</h2>
-                                            <Link to="/register">
-                                                <Button color="primary" className="mt-3" active tabIndex={-1}>Register</Button>
-                                            </Link>
-                                            <Link to="/signin">
+                                            {/*<Link to="/register">*/}
+                                            {/*    <Button color="primary" className="mt-3" active tabIndex={-1}>Register</Button>*/}
+                                            {/*</Link>*/}
+                                            <Link to="/login">
                                                 <Button color="primary" className="mt-3" active tabIndex={0}>Signin</Button>
+                                            </Link>
+                                            <Link to="/users">
+                                                <Button color="primary" className="mt-3" active tabIndex={0}>UserList</Button>
                                             </Link>
                                         </div>
                                     </CardBody>
