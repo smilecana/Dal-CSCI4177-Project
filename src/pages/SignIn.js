@@ -1,10 +1,13 @@
 import React, {useState} from 'react'
-import { useHistory } from "react-router-dom"
+import {useHistory} from "react-router-dom"
 import axios from 'axios';
-const SignIn =  () => {
+import {Button, Container, Form} from "react-bootstrap";
+
+const SignIn = () => {
     let history = useHistory();
     const [password, setPassword] = useState("");
     const [email, setEmail] = useState("");
+
     function submitForm(e) {
         e.preventDefault();
         if (password === "") {
@@ -16,33 +19,42 @@ const SignIn =  () => {
             return;
         }
         axios
-            .post("/api/users", {
+            .post("https://tutorial4-api.herokuapp.com/api/users/login", {
                 email: email,
                 password: password,
-            })
-            .then(function () {
-                alert("Account created successfully");
+            }).then(response => {
+            if (response.status) {
+                alert(response.data.message);
+                localStorage.setItem('user', email);
                 history.push('/users');
-            })
-            .catch(function () {
-                alert("Could not creat account. Please try again");
-            });
+            }
+        }).catch(function () {
+            alert("Could not creat account. Please try again");
+        });
     }
+
     return (
         <>
-            <form onSubmit={submitForm}>
-                <input
-                    onChange={(e) => setEmail(e.target.value)}
-                    type="text"
-                    placeholder="Enter your email address"
-                />
-                <input
-                    onChange={(e) => setPassword(e.target.value)}
-                    type="text"
-                    placeholder="Enter your password"
-                />
-                <input type="submit" />
-            </form>
+            <Container>
+                <br/>
+                <br/>
+                <Form onSubmit={submitForm}>
+                    <Form.Group className="mb-3" controlId="formBasicEmail">
+                        <Form.Label>Email address</Form.Label>
+                        <Form.Control type="email" placeholder="Enter email"
+                                      onChange={(e) => setEmail(e.target.value)}/>
+                    </Form.Group>
+
+                    <Form.Group className="mb-3" controlId="formBasicPassword">
+                        <Form.Label>Password</Form.Label>
+                        <Form.Control type="password" placeholder="Password"
+                                      onChange={(e) => setPassword(e.target.value)}/>
+                    </Form.Group>
+                    <Button variant="primary" type="submit">
+                        Submit
+                    </Button>
+                </Form>
+            </Container>
         </>
     )
 };
