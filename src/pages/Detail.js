@@ -9,12 +9,17 @@ const Detail = () => {
         let {id} = useParams();
         const [disabled, setDisabled] = useState(true)
         const [user, setUser] = useState({
-            'firstname': '',
-            'lastname': '',
+            'title': '',
+            'firstName': '',
+            'lastName': '',
             'email': '',
-            'password': '',
-            'errors': {'firstname': false, 'lastname': false, 'email': false, 'password': false, 'confirmPwd': false}
         });
+        const [err, setErr] = useState({
+            'firstName': false,
+            'lastName': false,
+            'email': false,
+            'title': false
+        })
         useEffect(() => {
             axios
                 .get(`/api/users/${id}`)
@@ -24,20 +29,20 @@ const Detail = () => {
                 });
         }, []);
         const handleInputChange = (keyName, e) => {
-            if (keyName === 'firstname' || keyName === 'lastname') {
+            if (keyName === 'firstName' || keyName === 'lastName') {
                 let regex = new RegExp(/^[a-zA-Z0-9]*$/); //check the alpha-numeric characters.
                 if (!regex.test(e.target.value)) {
-                    setUser({...user, 'errors': {...user.errors, [keyName]: true}});
+                    setErr({...err, [keyName]: true});
                     return;
                 }
             } else if (keyName === 'email') {
                 let regex = new RegExp(/^[\w-\\.]+@([\w-]+\.)+[\w-]{2,4}$/); //Check the email validation.
                 if (!regex.test(e.target.value)) {
-                    setUser({...user, 'errors': {...user.errors, [keyName]: true}});
+                    setErr({...err, [keyName]: true});
                     return;
                 }
             }
-            setUser({...user, [keyName]: e.target.value, 'errors': {...user.errors, [keyName]: false}});
+            setUser({...user, [keyName]: e.target.value});
         }
 
         function submitForm(e) {
@@ -62,10 +67,8 @@ const Detail = () => {
                         alert('User deleted');
                         history.push('/users');
                     }
-
                 });
         }
-
         return (
             <>
                 <Container>
@@ -77,18 +80,25 @@ const Detail = () => {
                     </Link>
                     <Form onSubmit={submitForm}>
                         <Form.Group className="mb-3" controlId="formBasicFirstName">
+                            <Form.Label>Title:</Form.Label>
+                            <Form.Control type="text" placeholder="Title"
+                                          disabled={disabled}
+                                          value={user.title}
+                                          onChange={(e) => handleInputChange('title', e)} required/>
+                        </Form.Group>
+                        <Form.Group className="mb-3" controlId="formBasicFirstName">
                             <Form.Label>Firstname:</Form.Label>
                             <Form.Control type="text" placeholder="FirstName"
                                           disabled={disabled}
-                                          value={user.firstname}
-                                          onChange={(e) => handleInputChange('firstname', e)} required/>
+                                          value={user.firstName}
+                                          onChange={(e) => handleInputChange('firstName', e)} required/>
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="formBasicLastName">
                             <Form.Label>Lastname:</Form.Label>
                             <Form.Control type="text" placeholder="LastName"
                                           disabled={disabled}
-                                          value={user.lastname}
-                                          onChange={(e) => handleInputChange('lastname', e)} required/>
+                                          value={user.lastName}
+                                          onChange={(e) => handleInputChange('lastName', e)} required/>
                         </Form.Group>
                         <Form.Group className="mb-3" controlId="formBasicEmail">
                             <Form.Label>E-mail:</Form.Label>

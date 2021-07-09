@@ -2,6 +2,7 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../models/User');
+const data = require('../dump');
 
 
 router.get('/', (req, res) => {
@@ -15,11 +16,22 @@ router.get('/:id', (req, res) => {
         .catch(err => console.log(err))
 })
 //Add User
+router.post('/dump', (req, res) => {
+    User.insertMany(data)
+        .then(() => res.json({
+            message: "Added dump data"
+        }))
+        .catch(err => res.status(400).json({
+            "error": err,
+            "message": "Error creating account"
+        }))
+})
+//Add User
 router.post('/', (req, res) => {
-    const {email, password, firstname, lastname} = req.body;
+    const {email, password, firstName, lastName} = req.body;
     const newUser = new User({
-        firstname: firstname,
-        lastname: lastname,
+        firstName: firstName,
+        lastName: lastName,
         email: email,
         password: password
     });
@@ -34,10 +46,10 @@ router.post('/', (req, res) => {
 })
 //Modified User
 router.put('/:id', (req, res) => {
-    const {email, firstname, lastname} = req.body;
+    const {email, firstName, lastName} = req.body;
     const newUser ={
-        firstname: firstname,
-        lastname: lastname,
+        firstName: firstName,
+        lastName: lastName,
         email: email,
     };
     User.findByIdAndUpdate({ _id: req.params['id'] },{$set: newUser} )
