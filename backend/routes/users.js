@@ -47,12 +47,12 @@ router.post('/', (req, res) => {
 //Modified User
 router.put('/:id', (req, res) => {
     const {email, firstName, lastName} = req.body;
-    const newUser ={
+    const updateUser ={
         firstName: firstName,
         lastName: lastName,
         email: email,
     };
-    User.findByIdAndUpdate({ _id: req.params['id'] },{$set: newUser} )
+    User.findByIdAndUpdate({ _id: req.params['id'] },{$set: updateUser} )
         .then(() => res.json({
             message: "update successfully"
         }))
