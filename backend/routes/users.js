@@ -104,13 +104,13 @@ router.post('/add', (req, res) => {
                 message: "User added"
             }))
             .catch(e => {
+                console.error(e)
                 if (e.code === 11000) {
                     return res.status(500).send({
                         success: false,
                         message: "Email address already exists."
                     })
                 }
-                console.error(e)
                 return res.status(500).send({
                     success: false,
                     message: "Something went wrong."
@@ -142,19 +142,29 @@ router.put('/update/:id', (req, res) => {
             email: email,
             title: title
         };
-        console.log("updateUser", updateUser);
-        User.findByIdAndUpdate(req.params['id'], {$set: updateUser})
-            .then(() => res.status(200).send({
-                success: true,
-                message: "Users updated",
-            }))
-            .catch(e => {
-                console.error(e);
+        User.findByIdAndUpdate(req.params['id'], {$set: updateUser}, function (err, model) {
+            if (err) {
+                if (err.code === 11000) {
+                    console.error('db', err);
+                    return res.status(500).send({
+                        success: false,
+                        message: "Email address already exists."
+                    })
+                }
                 return res.status(500).send({
                     success: false,
                     message: "Something went wrong"
                 })
+            }
+            if (!model) return res.status(404).send({
+                success: false,
+                message: "No user found",
             })
+            return res.status(200).send({
+                success: true,
+                message: "Users updated",
+            })
+        })
     } catch (e) {
         console.error(e);
         return res.status(500).send({
@@ -168,7 +178,6 @@ router.delete('/delete/:id', (req, res) => {
     try {
         User.findByIdAndRemove(req.params['id'])
             .then(() => {
-                console.log(res);
                 return res.status(200).send({
                     success: true,
                     message: "User deleted."
