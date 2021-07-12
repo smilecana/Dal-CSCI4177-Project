@@ -8,7 +8,7 @@ const Users = () => {
         const [users, setUsers] = useState([]);
         useEffect(() => {
             axios
-                .get("/api/users")
+                .get("/users")
                 .then(response => {
                     return setUsers(response.data.users)
                 });
@@ -16,7 +16,7 @@ const Users = () => {
 
         function deleteUser(id) {
             axios
-                .delete(`/api/delete/${id}`)
+                .delete(`/delete/${id}`)
                 .then(res => {
                     if (res.status === 200) {
                         alert('User deleted');
