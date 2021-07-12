@@ -38,8 +38,9 @@ const Register = () => {
 
     function submitForm(e) {
         e.preventDefault();
-        axios
-            .post("/api/users/", user).then(res => {
+        console.log(user);
+        axios.post("/api/add", user).then(res => {
+            console.log(res);
             if (res.status === 200) {
                 history.push('/users');
             }
@@ -60,8 +61,8 @@ const Register = () => {
                 <br/>
                 <br/>
                 <Form onSubmit={submitForm}>
-                    <Form.Group className="mb-3" controlId="formBasicFirstName">
-                        <Form.Label>Firstname:</Form.Label>
+                    <Form.Group className="mb-3" controlId="formBasicTitle">
+                        <Form.Label>Title:</Form.Label>
                         <Form.Control type="text" placeholder="Title"
                                       onChange={(e) => handleInputChange('title', e)} required/>
                     </Form.Group>

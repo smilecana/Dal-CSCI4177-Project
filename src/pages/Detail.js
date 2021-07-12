@@ -22,10 +22,9 @@ const Detail = () => {
         })
         useEffect(() => {
             axios
-                .get(`/api/users/${id}`)
+                .get(`/api/user/${id}`)
                 .then(res => {
-                    console.log(res.data);
-                    return setUser({...res.data});
+                    return setUser({...res.data.users});
                 });
         }, []);
         const handleInputChange = (keyName, e) => {
@@ -48,7 +47,7 @@ const Detail = () => {
         function submitForm(e) {
             e.preventDefault();
             axios
-                .put(`/api/users/${id}`, user).then(res => {
+                .put(`/api/update/${id}`, user).then(res => {
                 if (res.status === 200) {
                     alert('userdata updated!')
                     history.push('/users');
@@ -61,7 +60,7 @@ const Detail = () => {
         function deleteUser(e) {
             e.preventDefault();
             axios
-                .delete(`/api/users/${id}`)
+                .delete(`/api/delete/${id}`)
                 .then(res => {
                     if (res.status === 200) {
                         alert('User deleted');
@@ -79,7 +78,7 @@ const Detail = () => {
                         <Button>Go Back</Button>
                     </Link>
                     <Form onSubmit={submitForm}>
-                        <Form.Group className="mb-3" controlId="formBasicFirstName">
+                        <Form.Group className="mb-3" controlId="formBasicTitle">
                             <Form.Label>Title:</Form.Label>
                             <Form.Control type="text" placeholder="Title"
                                           disabled={disabled}

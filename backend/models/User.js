@@ -3,19 +3,19 @@ const Schema = mongoose.Schema;
 const userSchema = new Schema({
     title: {
         type: String,
-        required: true
+        required: false
     },
     firstName: {
         type: String,
-        required: true
+        required: false
     },
     lastName: {
         type: String,
-        required: true
+        required: false
     },
     email: {
         type: String,
-        required: true
+        required: false
     },
 })
 module.exports = mongoose.model("User", userSchema, "users")

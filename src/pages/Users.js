@@ -10,13 +10,13 @@ const Users = () => {
             axios
                 .get("/api/users")
                 .then(response => {
-                    return setUsers(response.data)
+                    return setUsers(response.data.users)
                 });
         }, []);
 
         function deleteUser(id) {
             axios
-                .delete(`/api/users/${id}`)
+                .delete(`/api/delete/${id}`)
                 .then(res => {
                     if (res.status === 200) {
                         alert('User deleted');
@@ -38,9 +38,9 @@ const Users = () => {
                         <>
                             <br/>
                             <br/>
-                            <Row xs={1} md={4} className="g-4">
+                            <Row xs={1} md={3} className="g-4">
                                 {users.map(item =>
-                                    <Col key={item.id}>
+                                    <Col key={item._id}>
                                         <Card>
                                             <Card.Img variant="top" src={item.picture}/>
                                             <Card.Body>

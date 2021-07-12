@@ -15,7 +15,7 @@ const Home = () => {
     function addDumpData(e) {
         e.preventDefault();
         axios
-            .post(`/api/users/dump`)
+            .post(`/api/dump`)
             .then(res => {
                 if (res.status === 200) {
                     alert('added dump data');
