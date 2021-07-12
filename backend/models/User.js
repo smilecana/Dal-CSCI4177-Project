@@ -7,15 +7,16 @@ const userSchema = new Schema({
     },
     firstName: {
         type: String,
-        required: false
+        required: true
     },
     lastName: {
         type: String,
-        required: false
+        required: true
     },
     email: {
         type: String,
-        required: false
+        required: true,
+        unique: true
     },
 })
 module.exports = mongoose.model("User", userSchema, "users")

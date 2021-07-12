@@ -8,13 +8,27 @@ const mongoose = require("mongoose");
 //All user list
 router.get('/users', (req, res) => {
     try {
-        User.find()
-            .then(users => res.json({
+        User.find().exec().then(users => {
+            if (!users.length) {
+                return res.status(404).send({
+                    success: false,
+                    message: "No user found",
+                })
+            }
+            return res.status(200).send({
                 success: true,
                 message: "Users retrieved",
                 "users": users
-            }))
-            .catch(err => console.log(err))
+            })
+        })
+            .catch(e => {
+                    console.error(e);
+                    return res.status(500).send({
+                        success: false,
+                        message: "Something went wrong"
+                    })
+                }
+            )
     } catch (e) {
         return res.status(500).json({
             success: false,
@@ -25,21 +39,36 @@ router.get('/users', (req, res) => {
 })
 //find user by Id
 router.get('/user/:id', (req, res) => {
-    const isValidId = mongoose.Types.ObjectId.isValid(req.params['id'])
-    if (!isValidId) return res.status(400).send("Id is not valid")
-    else {
+    try {
         User.findById(req.params['id'])
-            .then(users => res.json({
-                success: true,
-                "users": users
-            }))
-            .catch(e => {
-                res.status(500).send({
-                    success: false,
-                    message: "Internal server error"
+            .then(users => {
+                if (!users) {
+                    return res.status(404).send({
+                        success: false,
+                        message: "No user found",
+                    })
+                }
+                return res.send({
+                    success: true,
+                    "users": users
                 })
             })
+            .catch(e => {
+                    console.error(e);
+                    return res.status(500).send({
+                        success: false,
+                        message: "Something went wrong"
+                    })
+                }
+            )
+    } catch (e) {
+        console.error(e);
+        return res.status(500).json({
+            success: false,
+            message: "Internal server error",
+        })
     }
+
 })
 //Add Multiple data
 router.post('/dump', (req, res) => {
@@ -52,64 +81,113 @@ router.post('/dump', (req, res) => {
             message: "Internal server error"
         }))
 })
+
 //Add User
 router.post('/add', (req, res) => {
-    const {email, password, firstName, lastName, title} = req.body;
-    const newUser = new User({
-        firstName: firstName,
-        lastName: lastName,
-        email: email,
-        password: password,
-        title: title
-    });
-    newUser.save()
-        .then(() => res.status(201).send({
-            success: true,
-            message: "User added"
-        }))
-        .catch(err => res.status(500).send({
+    try {
+        const {email, firstName, lastName, title} = req.body;
+        if (!email || !firstName || !title || !lastName) {
+            return res.status(400).send({
+                message: "Missing body params or check the params keys",
+                success: false
+            })
+        }
+        const newUser = new User({
+            firstName,
+            lastName,
+            email,
+            title
+        });
+        newUser.save()
+            .then(() => res.status(200).send({
+                success: true,
+                message: "User added"
+            }))
+            .catch(e => {
+                if (e.code === 11000) {
+                    return res.status(500).send({
+                        success: false,
+                        message: "Email address already exists."
+                    })
+                }
+                console.error(e)
+                return res.status(500).send({
+                    success: false,
+                    message: "Something went wrong."
+                })
+            })
+    } catch (e) {
+        console.log(e)
+        return res.status(500).json({
             success: false,
-            message: "Internal server error"
-        }))
+            message: "Internal server error.",
+        })
+    }
+
 
 })
 //Modified User
 router.put('/update/:id', (req, res) => {
-    const {email, firstName, lastName} = req.body;
-    const updateUser = {
-        firstName: firstName,
-        lastName: lastName,
-        email: email,
-    };
-    const isValidId = mongoose.Types.ObjectId.isValid(req.params['id'])
-    if (!isValidId) return res.status(404).send("Users not found")
-    else {
-        User.findByIdAndUpdate({_id: req.params['id']}, {$set: updateUser})
+    try {
+        const {email, firstName, lastName, title} = req.body;
+        if (!email || !firstName || !title || !lastName) {
+            return res.status(400).send({
+                message: "Missing body params or check the params keys",
+                success: false
+            })
+        }
+        const updateUser = {
+            firstName: firstName,
+            lastName: lastName,
+            email: email,
+            title: title
+        };
+        console.log("updateUser", updateUser);
+        User.findByIdAndUpdate(req.params['id'], {$set: updateUser})
             .then(() => res.status(200).send({
                 success: true,
                 message: "Users updated",
             }))
-            .catch(err => res.status(500).json({
-                success: false,
-                message: "Internal server error"
-            }))
+            .catch(e => {
+                console.error(e);
+                return res.status(500).send({
+                    success: false,
+                    message: "Something went wrong"
+                })
+            })
+    } catch (e) {
+        console.error(e);
+        return res.status(500).send({
+            success: false,
+            message: "Internal server error",
+        })
     }
 })
 // Delete User
 router.delete('/delete/:id', (req, res) => {
-    const isValidId = mongoose.Types.ObjectId.isValid(req.params['id'])
-    if (!isValidId) return res.status(404).send("Users not found")
-    else {
+    try {
         User.findByIdAndRemove(req.params['id'])
-            .then(() => res.json({
-                success: true,
-                message: "User deleted."
-            }))
-            .catch(err => res.status(500).json({
-                error: err,
-                success: false,
-                message: "Internal server error"
-            }))
+            .then(() => {
+                console.log(res);
+                return res.status(200).send({
+                    success: true,
+                    message: "User deleted."
+                })
+            })
+            .catch(e => {
+                console.error(e);
+                return res.status(500).send({
+                    success: false,
+                    message: "Something went wrong"
+                })
+            })
+    } catch (e) {
+        console.error(e);
+        return res.status(500).json({
+            success: false,
+            message: "Internal server error",
+        })
     }
+
 })
 module.exports = router;
