@@ -1,7 +1,7 @@
 # CSCI4177 Project
 
 * *Date Created*: 24 May 2021
-* *Last Modification Date*: 11 July 2021
+* *Last Modification Date*: 12 July 2021
 * *URL*: https://github.com/Aref19a/4177-project
 
 ## Authors
