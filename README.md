@@ -8,7 +8,9 @@
 
 * [HanaPark](hn946002@dal.ca) - *(contributor)*
 * [Ty Fetinko](ty667216@dal.ca) - *(contributor)*
- 
+* [Aref Abdipoor](aref.adbi@dal.ca) - *(contributor)*
+* [Brady MacDonald](brady.macdonald@dal.ca) - *(contributor)*
+* [Ryan McInroy](ry624227@dal.ca) - *(contributor)*
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
