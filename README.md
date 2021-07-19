@@ -2,7 +2,7 @@
 # CSCI4177 Project
 
 * *Date Created*: 24 May 2021
-* *Last Modification Date*: 11 July 2021
+* *Last Modification Date*: 19 July 2021
 * *URL*: https://github.com/Aref19a/4177-project
 
 ## Authors
@@ -54,6 +54,105 @@ $ npm run dev
 By clicking the button below you can signup for Heroku and deploy a working copy of MEANJS to the cloud without having to do the steps above.
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://hana-park-t4-csci4177.herokuapp.com/)
+
+## Sources Used
+### authentication.js
+I used jwt for authentication.
+
+*Lines - 05*
+
+```
+const decode = jsonwebtoken.verify(localStorage.getItem('lmsToken'), 'lmsPlatform');
+```
+
+The code above was created by adapting the code in [jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken) as shown below:
+
+```
+var decoded = jwt.decode(token, {complete: true});
+```
+### PrivateRoute.js
+I applied the code for the authentication.
+
+*Lines - 04 ~ 09*
+
+```
+const PrivateRoute = ({component: Component, auth, ...rest}) => {
+    return (<Route {...rest}
+                   render={(props) => {
+                       return auth ? <Component {...props} /> : <Redirect to="/login"/>
+                   }}/>)
+}
+```
+
+The code above was created by adapting the code in [Coder Who Dreams](https://coderwhodreams.com/blog/creating-private-routes-and-handling-session-in-react-js/) as shown below:
+
+```
+import React from 'react';
+import { Redirect, Route } from "react-router-dom";
+import { ACCESS_TOKEN_NAME } from '../constants/apiContants';
+function PrivateRoute({ children, ...rest }) {
+    return (
+      <Route
+        {...rest}
+        render={({ location }) =>
+          localStorage.getItem(ACCESS_TOKEN_NAME) ? (
+            children
+          ) : (
+            <Redirect
+              to={{
+                pathname: "/login",
+                state: { from: location }
+              }}
+            />
+          )
+        }
+      />
+    );
+  }
+export default PrivateRoute;
+```
+### index.js
+I applied the code for password security.
+It is uses hash password.
+
+*Lines - 12 ~ 14*
+```
+    const user = await User.findOne({email: req.body.email})
+        if (user) {
+            const validPassword = await bcrypt.compare(req.body.password, user.password);
+            //do something
+        }
+```
+The code above was created by adapting the code in [bcrypt](https://www.npmjs.com/package/bcrypt) as shown below:
+```
+async function checkUser(username, password) {
+    //... fetch user from a db etc.
+
+    const match = await bcrypt.compare(password, user.passwordHash);
+
+    if(match) {
+        //login
+    }
+
+    //...
+}
+
+```
+
+*Lines - 69 ~ 70*
+```
+    const salt = await bcrypt.genSalt(10);
+    newUser.password = await bcrypt.hash(newUser.password, salt);
+```
+The code above was created by adapting the code in [How to usehashfunctioninbcrypt](https://www.tabnine.com/code/javascript/functions/bcrypt/hash) as shown below:
+
+```
+  const salt = await bcrypt.genSalt(10);
+  user.password = await bcrypt.hash(req.body.password, salt);
+```
+I also checked using await / async.
+[Javascript Info](https://javascript.info/async-await)
+
 
 ## Built With
 
