@@ -2,8 +2,9 @@
 # CSCI4177 Project
 
 * *Date Created*: 24 May 2021
-* *Last Modification Date*: 19 July 2021
+* *Last Modification Date*: 21 July 2021
 * *URL*: https://github.com/Aref19a/4177-project
+
 
 ## Authors
 
@@ -12,6 +13,29 @@
 * [Aref Abdipoor](aref.adbi@dal.ca) - *(contributor)*
 * [Brady MacDonald](brady.macdonald@dal.ca) - *(contributor)*
 * [Ryan McInroy](ry624227@dal.ca) - *(contributor)*
+
+
+# Assignment3
+##UserProfileManagement
+My part is the UserProfile Management
+I made new branch as [hana-loginAndRegister](https://github.com/Aref19a/4177-project/tree/hana-loginAndRegister)
+
+The following files are added for user profile management:
+###View
+* login : SignIn.js
+* register: Register.js
+* UserProfile: UserProfile.js
+
+###Routes
+* user.js
+###Models
+* User.js
+
+###component
+It also includes user authentication.
+* authentication.js
+* PrivateRoute.js
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
@@ -53,7 +77,7 @@ $ npm run dev
 
 By clicking the button below you can signup for Heroku and deploy a working copy of MEANJS to the cloud without having to do the steps above.
 
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://hana-park-t4-csci4177.herokuapp.com/)
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://csci4177-project.herokuapp.com/)
 
 ## Sources Used
 ### authentication.js
