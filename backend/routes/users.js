@@ -5,57 +5,33 @@ const User = require('../models/User');
 const data = require('../dump');
 const mongoose = require("mongoose");
 
-//All user list
-router.get('/users', (req, res) => {
+//find user by Email
+router.get('/', (req, res) => {
     try {
-        User.find().exec().then(users => {
-            if (!users.length) {
-                return res.status(404).send({
-                    success: false,
-                    message: "No user found",
-                })
-            }
-            return res.status(200).send({
-                success: true,
-                message: "Users retrieved",
-                "users": users
-            })
-        })
-            .catch(e => {
-                    console.error(e);
-                    return res.status(500).send({
+        let email = req.body;
+        User.find({email: email})
+            .then(user => {
+                if (!user) {
+                    return res.status(404).send({
                         success: false,
-                        message: "Something went wrong"
+                        message: "No user found",
                     })
                 }
-            )
+                return res.send({
+                    success: true,
+                    "user": user
+                })
+            })
     } catch (e) {
+        console.error(e);
         return res.status(500).json({
             success: false,
             message: "Internal server error",
         })
     }
-
-})
-//find user by Email
-router.get('/user', (req, res) => {
-    let email = req.body;
-    User.find({email: email})
-        .then(user => {
-            if (!user) {
-                return res.status(404).send({
-                    success: false,
-                    message: "No user found",
-                })
-            }
-            return res.send({
-                success: true,
-                "user": user
-            })
-        })
 } )
 //find user by Id
-router.get('/user/:id', (req, res) => {
+router.get('/:id', (req, res) => {
     try {
         User.findById(req.params['id'])
             .then(users => {
@@ -87,7 +63,7 @@ router.get('/user/:id', (req, res) => {
     }
 })
 //Modified User
-router.put('/user/:id', (req, res) => {
+router.put('/:id', (req, res) => {
     try {
         const {userName, bio,github,linkedin,web} = req.body;
         if (!userName) {
@@ -128,7 +104,7 @@ router.put('/user/:id', (req, res) => {
     }
 })
 // Delete User
-router.delete('/user/:id', (req, res) => {
+router.delete('/:id', (req, res) => {
     try {
         User.findByIdAndRemove(req.params['id'])
             .then(() => {

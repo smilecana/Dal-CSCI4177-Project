@@ -7,7 +7,7 @@ const User = require('../models/User');
 const bcrypt = require("bcryptjs")
 const jsonwebtoken = require('jsonwebtoken');
 
-router.use('/api', userRoutes);
+router.use('/api/user', userRoutes);
 router.use('/api', fileRouters);
 
 //login
