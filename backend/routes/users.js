@@ -37,6 +37,23 @@ router.get('/users', (req, res) => {
     }
 
 })
+//find user by Email
+router.get('/user', (req, res) => {
+    let email = req.body;
+    User.find({email: email})
+        .then(user => {
+            if (!user) {
+                return res.status(404).send({
+                    success: false,
+                    message: "No user found",
+                })
+            }
+            return res.send({
+                success: true,
+                "user": user
+            })
+        })
+} )
 //find user by Id
 router.get('/user/:id', (req, res) => {
     try {
@@ -68,70 +85,12 @@ router.get('/user/:id', (req, res) => {
             message: "Internal server error",
         })
     }
-
-})
-//Add Multiple data
-router.post('/dump', (req, res) => {
-    User.insertMany(data)
-        .then(() => res.json({
-            message: "Added dump data"
-        }))
-        .catch(err => res.status(400).json({
-            success: false,
-            message: "Internal server error"
-        }))
-})
-
-//Add User
-router.post('/add', (req, res) => {
-    try {
-        const {email, userName, password, type} = req.body;
-        if (!email || !password || !userName) {
-            return res.status(400).send({
-                message: "Missing body params or check the params keys",
-                success: false
-            })
-        }
-        const newUser = new User({
-            userName,
-            email,
-            password,
-            type
-        });
-
-        newUser.save()
-            .then(() => res.status(200).send({
-                success: true,
-                message: "User added"
-            }))
-            .catch(e => {
-                console.error(e)
-                if (e.code === 11000) {
-                    return res.status(500).send({
-                        success: false,
-                        message: "Email address already exists."
-                    })
-                }
-                return res.status(500).send({
-                    success: false,
-                    message: "Something went wrong."
-                })
-            })
-    } catch (e) {
-        console.log(e)
-        return res.status(500).json({
-            success: false,
-            message: "Internal server error.",
-        })
-    }
-
-
 })
 //Modified User
-router.put('/update/:id', (req, res) => {
+router.put('/user/:id', (req, res) => {
     try {
-        const {email, userName, password, type} = req.body;
-        if (!email || !password || !userName) {
+        const {userName, bio,github,linkedin,web} = req.body;
+        if (!userName) {
             return res.status(400).send({
                 message: "Missing body params or check the params keys",
                 success: false
@@ -139,18 +98,13 @@ router.put('/update/:id', (req, res) => {
         }
         const updateUser = {
             userName: userName,
-            email: email,
-            type: type
+            bio: bio,
+            github: github,
+            linkedin: github,
+            web: web
         };
         User.findByIdAndUpdate(req.params['id'], {$set: updateUser}, function (err, model) {
             if (err) {
-                if (err.code === 11000) {
-                    console.error('db', err);
-                    return res.status(500).send({
-                        success: false,
-                        message: "Email address already exists."
-                    })
-                }
                 return res.status(500).send({
                     success: false,
                     message: "Something went wrong"
@@ -174,7 +128,7 @@ router.put('/update/:id', (req, res) => {
     }
 })
 // Delete User
-router.delete('/delete/:id', (req, res) => {
+router.delete('/user/:id', (req, res) => {
     try {
         User.findByIdAndRemove(req.params['id'])
             .then(() => {
