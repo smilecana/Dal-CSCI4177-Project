@@ -1,12 +1,15 @@
 // index.js
 const router = require('express').Router();
 const userRoutes = require('./users');
+const fileRouters = require('./assignments');
 const User = require('../models/User');
 
 const bcrypt = require("bcryptjs")
 const jsonwebtoken = require('jsonwebtoken');
 
 router.use('/api', userRoutes);
+router.use('/api', fileRouters);
+
 //login
 router.post('/login', async (req, res) => {
     try {
