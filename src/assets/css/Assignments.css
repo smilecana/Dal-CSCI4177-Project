@@ -1,0 +1,13 @@
+/*Brady MacDonald*/
+
+.btn-primary {
+    color: #fff;
+    background-color: #04aa2d !important;
+    border-color: #087423 !important;
+}
+
+.wrap button {
+    width: 100%;
+    margin: 5% 0;
+}
+
