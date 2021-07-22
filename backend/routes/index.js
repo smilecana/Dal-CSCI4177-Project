@@ -3,6 +3,7 @@ const router = require('express').Router();
 const userRoutes = require('./users');
 const fileRouters = require('./assignments');
 const User = require('../models/User');
+
 const bcrypt = require("bcryptjs")
 const jsonwebtoken = require('jsonwebtoken');
 
@@ -16,7 +17,7 @@ router.post('/login', async (req, res) => {
         if (user) {
             const validPassword = await bcrypt.compare(req.body.password, user.password);
             if (validPassword) {
-                const token = jsonwebtoken.sign({user: user.userName}, process.env.PUBLIC_TOKEN_KEY);
+                const token = jsonwebtoken.sign({id: user.id, email: user.email}, process.env.PUBLIC_TOKEN_KEY);
                 res.status(200).json({
                     token: token,
                     message: "login succeed"
@@ -32,7 +33,6 @@ router.post('/login', async (req, res) => {
             })
         }
     } catch (e) {
-        console.log(e);
         res.status(500).json({
             success: false,
             message: "Internal server error.",

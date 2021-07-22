@@ -57,6 +57,7 @@ const Register = () => {
         e.preventDefault();
         axios.post("/signup", user).then(res => {
             if (res.status === 200) {
+                alert(res.data.message);
                 history.push('/');
             }
         }).catch(e => {

@@ -14,5 +14,23 @@ const userSchema = new Schema({
         type: String,
         required: true,
     },
+    type: {
+        type: String,
+    },
+    image: {
+        type: String
+    },
+    github: {
+        type: String
+    },
+    web: {
+        type: String
+    },
+    linkedin: {
+        type: String
+    },
+    bio: {
+        type: String
+    }
 })
 module.exports = mongoose.model("User", userSchema, "users")
