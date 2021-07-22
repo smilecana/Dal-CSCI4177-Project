@@ -15,13 +15,13 @@ const UserProfile = () => {
         bio: ''
     });
     useEffect(() => {
-        axios
-            .get(`/api/user/${id}`,)
-            .then(response => {
-                return setUser(response.data.users)
-            }).catch(err => {
-            console.log('Error : ' + err);
-        });
+        // axios
+        //     .get(`/api/user/${id}`,)
+        //     .then(response => {
+        //         return setUser(response.data.users)
+        //     }).catch(err => {
+        //     console.log('Error : ' + err);
+        // });
     });
 
     const [err, setErr] = useState({
