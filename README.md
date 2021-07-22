@@ -4,6 +4,7 @@
 * *Date Created*: 24 May 2021
 * *Last Modification Date*: 21 July 2021
 * *URL*: https://github.com/Aref19a/4177-project
+* Heroku Link : https://csci4177-project.herokuapp.com/
 
 
 ## Authors
@@ -14,6 +15,8 @@
 * [Brady MacDonald](brady.macdonald@dal.ca) - *(contributor)*
 * [Ryan McInroy](ry624227@dal.ca) - *(contributor)*
 
+# Assignment3
+##UserProfileManagement
 
 # Getting Started with Create React App
 
@@ -58,37 +61,7 @@ By clicking the button below you can signup for Heroku and deploy a working copy
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://csci4177-project.herokuapp.com/)
 
-
-# Assignment3
-##UserProfileManagement
-### HanaPark
-My part is the UserProfile Management
-I made new branch as [hana-loginAndRegister](https://github.com/Aref19a/4177-project/tree/hana-loginAndRegister)
-
-The following files are added for user profile management:
-###View
-src/pages/SignIn.js
-
-src/pages/Register.js
-
-src/pages/UserProfile.js
-
-###css
-src/assets/css/Register.css
-
-src/assets/css/SignIn.css
-
-src/assets/css/Common.css
-###Routes
-backend/routes/users.js
-###Models
-backend/models/User.js
-
-###component
-It also includes user authentication.
-* src/component/authentication.js
-* src/component/PrivateRoute.js
-## Files Created
+## Files Created or Edited 
 ### Brady MacDonald
 src/pages/Assignments.js
 
@@ -99,6 +72,45 @@ backend/controllers/assignmentController.js
 backend/models/Assignment.js
 
 backend/routes/assignments.js
+
+
+### Ty Fetinko
+src/App.js
+
+src/pages/Grades.js
+
+src/pages/Home.js
+
+src/pages/Index.js
+
+src/assets/css/Grades.css
+
+backend/routes/assignments.js
+
+### Hana Park
+My part is the UserProfile Management
+
+I made new branch as [hana-loginAndRegister](https://github.com/Aref19a/4177-project/tree/hana-loginAndRegister)
+
+backend/routes/users.js
+
+backend/models/User.js
+
+src/pages/SignIn.js
+
+src/pages/Register.js
+
+src/pages/UserProfile.js
+
+src/assets/css/Register.css
+
+src/assets/css/SignIn.css
+
+src/assets/css/Common.css
+
+src/component/authentication.js
+
+src/component/PrivateRoute.js
 
 ## Sources Used
 ### src/pages/Assignments.js
