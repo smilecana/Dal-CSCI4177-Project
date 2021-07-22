@@ -6,6 +6,7 @@ import {useParams} from "react-router";
 
 const UserProfile = (props) => {
     let {id} = useParams();
+    console.log(`${props}`);
     const [user, setUser] = useState({});
     useEffect(() => {
         axios
