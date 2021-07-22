@@ -8,13 +8,12 @@ const UserProfile = () => {
     let {id} = useParams();
     const [user, setUser] = useState({});
     useEffect(() => {
-        console.log(1);
         axios
             .get(`api/user/${id}`,)
             .then(response => {
                 return setUser(response.data.users)
             });
-    });
+    },[]);
 
     const [err, setErr] = useState({
         'userName': false,
