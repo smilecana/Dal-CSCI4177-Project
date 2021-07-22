@@ -11,7 +11,7 @@ const App = () => {
             <PageHeader data={authentication()}/>
             <Router>
                 <Switch>
-                    {<Route path="/register" component={Register}/>}
+                    {<Route path="/register" component={UserProfile}/>}
                     {<Route path="/login" exact>
                         <SignIn auth={authentication()} />
                     </Route>
