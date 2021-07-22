@@ -9,4 +9,3 @@ mongoose.connect(process.env.MONGODB_CONNECTION_DEV_STRING, {
 })
     .then(() => console.log("Database Connected Successfully"))
     .catch(err => console.log(err));
-

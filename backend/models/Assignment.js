@@ -2,6 +2,8 @@
 
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+
+//Assignment fields which will be uploaded to database
 const assignmentSchema = new Schema({
     assignmentNum: {
         type: String,

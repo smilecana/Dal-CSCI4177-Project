@@ -4,24 +4,25 @@ import axios from 'axios';
 import React, {useState} from 'react';
 import {Button, Container, Form,} from 'react-bootstrap';
 import {Link} from "react-router-dom";
+import '../assets/css/Assignments.css'
 
 const Assignments = (props) => {
     
     const formData = new FormData();
     
-
     const [submission, setSubmission] = useState({
-        'assignmentNum': '',
         'file': null,
-        'fileName': ''
+        'fileName': '',
+        'assignmentNum': ''
     });
 
     const onInputChange = (inputNum, e) => {
 
         setSubmission({...submission, 'file': e.target.files[0]});
-        setSubmission({...submission, 'fileName': 'e.target.files[0].name'});
+        setSubmission({...submission, 'fileName': e.target.files[0].name});
         setSubmission({...submission, 'assignmentNum': inputNum});
 
+        alert(e.target.files[0].name);
         alert(submission.fileName);
 
         formData.append("fileName", e.target.files[0].name)
@@ -29,15 +30,16 @@ const Assignments = (props) => {
     }
 
     const onSubmit = (e) =>  {
-        alert(submission.assignmentNum);
+        e.preventDefault();
 
         alert(submission.fileName);
-        e.preventDefault();
+        alert(formData.fileName);
+        
 
         axios.post('/api/upload_file', {
             assignmentNum: submission.assignmentNum, 
             file: "file_content", 
-            fileName: submission.fileName
+            fileName: "fileName"
         }).then(res => { 
             if (res.status === 200) {
                 alert("response 200 OK");

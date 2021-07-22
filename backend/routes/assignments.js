@@ -10,14 +10,15 @@ router.post('/upload_file', (req, res) => {
         const assignmentNumber = req.body.assignmentNum;
         const file = req.body.file;
         const fileName = req.body.fileName;
-        console.log(req.body.fileName);
-        console.log(req.body.assignmentNum)
-        /*if (!file || !fileName || !assingmentNum) {
+
+        //Check input is not empty
+        if (!file || !fileName || !assignmentNumber) {
             return res.status(400).send({
                 message: "Missing body",
                 success: false
             })
-        }*/
+        }
+        //Create and set values of Assignment object to be uploaded to database
         const newAssignment = new Assignment();
         newAssignment.assignmentNum = assignmentNumber;
         newAssignment.file = file;
@@ -30,14 +31,12 @@ router.post('/upload_file', (req, res) => {
                 message: "Assignment added"
             }))
             .catch(e => {
-                console.log("Testing_: ", e)
                 return res.status(500).send({
                     success: false,
                     message: "Something went wrong."
                 })
             })
     } catch (e) {
-        console.log("TESTING!!!!!!!!!!: ", e)
         return res.status(500).json({
             success: false,
             message: "Internal server error.",
