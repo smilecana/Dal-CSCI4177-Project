@@ -43,4 +43,35 @@ router.post('/upload_file', (req, res) => {
         })
     }
 })
+
+router.get('/retrieve_assignments',(req,res) =>{
+    try {
+        Assignment.find().exec().then(Assignment => {
+            if (!Assignment.length) {
+                return res.status(404).send({
+                    success: false,
+                    message: "No assignment found",
+                })
+            }
+            return res.status(200).send({
+                success: true,
+                message: "Assignment retrieved",
+                "Assignment": Assignment
+            })
+        })
+            .catch(e => {
+                    console.error(e);
+                    return res.status(500).send({
+                        success: false,
+                        message: "Something went wrong"
+                    })
+                }
+            )
+    } catch (e) {
+        return res.status(500).json({
+            success: false,
+            message: "Internal server error",
+        })
+    }
+})
 module.exports = router;

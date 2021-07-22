@@ -28,6 +28,9 @@ const Home = () => {
                                             <Button color="primary" className="mt-3" active
                                                     tabIndex={1}>Assignments</Button>
                                         </Link> &nbsp;&nbsp;
+                                        <Link to="/grades">
+                                            <Button color="primary" className="mt-3" active tabIndex={1}>Grades</Button>
+                                        </Link> &nbsp;&nbsp;
                                     </div>
                                 </CardBody>
                             </Card>
