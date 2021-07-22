@@ -1,32 +1,55 @@
-import React, {useState} from 'react'
-import {useHistory} from "react-router-dom"
+import React, {useEffect, useState} from 'react'
+import {Link, useHistory} from "react-router-dom"
 import axios from 'axios';
-import {Button, Container, Form} from "react-bootstrap";
+import {Button, Card, Container, Form} from "react-bootstrap";
+import '../assets/css/SignIn.css'
 
-const SignIn = () => {
+const SignIn = (props) => {
     let history = useHistory();
-    const [password, setPassword] = useState("");
-    const [email, setEmail] = useState("");
+    const [user, setUser] = useState({
+        'email': '',
+        'password': ''
+    });
+    const [err, setErr] = useState({
+        'email': false,
+        'password': false,
+    })
+    const handleInputChange = (keyName, e) => {
+        if (keyName === 'email') {
+            let regex = new RegExp(/^[\w-\\.]+@([\w-]+\.)+[\w-]{2,4}$/); //Check the email validation.
+            if (!regex.test(e.target.value)) {
+                setErr({...err, [keyName]: true});
+                return;
+            }
+        } else if (keyName === "password") {
+            let regex = new RegExp(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$_!%*#?&])[A-Za-z\d@$_!%*#?&]{8,}$/);  //It allows alphabets, special characters, and at least 8 characters.
+            if (!regex.test(e.target.value)) {
+                setErr({...err, [keyName]: true});
+                return;
+            }
+        }
+        setUser({...user, [keyName]: e.target.value});
+        setErr({...err, [keyName]: false});
+    }
 
-    function submitForm(e) {
+    useEffect(() => {
+        if (props.authed) {
+            history.push('/');
+        }
+    })
+
+    const submitForm = (e) =>  {
         e.preventDefault();
-        if (password === "") {
-            alert("Please fill the username field");
-            return;
-        }
-        if (email === "") {
-            alert("Please fill the email field");
-            return;
-        }
+
         axios
-            .post("https://tutorial4-api.herokuapp.com/api/users/login", {
-                email: email,
-                password: password,
+            .post("/login", {
+                email: user.email,
+                password: user.password,
             }).then(response => {
             if (response.status) {
                 alert(response.data.message);
-                localStorage.setItem('user', email);
-                history.push('/users');
+                localStorage.setItem('lmsToken', response.data.token);
+                history.push('/');
             }
         }).catch(function () {
             alert("Could not creat account. Please try again");
@@ -35,24 +58,26 @@ const SignIn = () => {
 
     return (
         <>
-            <Container>
-                <br/>
-                <br/>
+            <Container className='wrap'>
+                <h2>Sign in</h2>
                 <Form onSubmit={submitForm}>
                     <Form.Group className="mb-3" controlId="formBasicEmail">
-                        <Form.Label>Email address</Form.Label>
                         <Form.Control type="email" placeholder="Enter email"
-                                      onChange={(e) => setEmail(e.target.value)}/>
+                                      isInvalid={!!err.email}
+                                      onChange={(e) => handleInputChange('email', e)} required/>
                     </Form.Group>
-
                     <Form.Group className="mb-3" controlId="formBasicPassword">
-                        <Form.Label>Password</Form.Label>
                         <Form.Control type="password" placeholder="Password"
-                                      onChange={(e) => setPassword(e.target.value)}/>
+                                      isInvalid={!!err.password}
+                                      onChange={(e) => handleInputChange('password', e)} required/>
                     </Form.Group>
                     <Button variant="primary" type="submit">
-                        Submit
+                        Log In
                     </Button>
+                    <Card className='register-box'>
+                        <Card.Body>New to LMS Platform? <Link to="/register"><Card.Link href="#">Create an
+                            account</Card.Link></Link></Card.Body>
+                    </Card>
                 </Form>
             </Container>
         </>

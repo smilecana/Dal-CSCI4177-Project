@@ -85,19 +85,20 @@ router.post('/dump', (req, res) => {
 //Add User
 router.post('/add', (req, res) => {
     try {
-        const {email, firstName, lastName, title} = req.body;
-        if (!email || !firstName || !title || !lastName) {
+        const {email, userName, password, type} = req.body;
+        if (!email || !password || !userName) {
             return res.status(400).send({
                 message: "Missing body params or check the params keys",
                 success: false
             })
         }
         const newUser = new User({
-            firstName,
-            lastName,
+            userName,
             email,
-            title
+            password,
+            type
         });
+
         newUser.save()
             .then(() => res.status(200).send({
                 success: true,
@@ -129,18 +130,17 @@ router.post('/add', (req, res) => {
 //Modified User
 router.put('/update/:id', (req, res) => {
     try {
-        const {email, firstName, lastName, title} = req.body;
-        if (!email || !firstName || !title || !lastName) {
+        const {email, userName, password, type} = req.body;
+        if (!email || !password || !userName) {
             return res.status(400).send({
                 message: "Missing body params or check the params keys",
                 success: false
             })
         }
         const updateUser = {
-            firstName: firstName,
-            lastName: lastName,
+            userName: userName,
             email: email,
-            title: title
+            type: type
         };
         User.findByIdAndUpdate(req.params['id'], {$set: updateUser}, function (err, model) {
             if (err) {

@@ -1,0 +1,42 @@
+
+.wrap {
+    margin: 15% auto;
+    width: 350px !important;
+    background-color: #F1F5F9;
+    border-radius: 10px;
+    padding: 30px 50px;
+    text-align: center;
+}
+.wrap h2 {
+    font-family: Montserrat, sans-serif;
+    font-style: normal;
+    font-weight: normal;
+    margin-bottom: 10%;
+}
+.wrap form {
+    margin: 5%
+}
+.btn-primary {
+    color: #fff;
+    background-color: #A78BFA !important;
+    border-color: #A78BFA !important;
+}
+.form-control {
+    background-color: #E2E3E5 !important;
+    border: 0 !important;
+}
+.wrap button {
+    width: 100%;
+    margin: 5% 0;
+}
+.wrap .register-box{
+    font-size: .8em;
+    text-align: left;
+}
+.wrap .btn-link{
+    margin: 0;
+    text-decoration: underline;
+}
+.wrap .student {
+    margin-right: 15%;
+}

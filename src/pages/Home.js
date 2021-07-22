@@ -20,8 +20,13 @@ const Home = () => {
                 if (res.status === 200) {
                     alert('added dump data');
                 }
-
             });
+    }
+    function logout() {
+       localStorage.removeItem('lmsToken');
+       if (!localStorage.getItem('lmsToken')) {
+           window.location = "/"
+       }
     }
 
     return (
@@ -32,14 +37,15 @@ const Home = () => {
                         <Card className="text-white bg-primary py-5 d-md-down-none" style={{width: '44%'}}>
                             <CardBody className="text-center">
                                 <div>
-                                    <h2>Home</h2>
+                                    <h2>Learning Platform</h2>
                                     <Link to="/register">
                                         <Button color="primary" className="mt-3" active tabIndex={0}>Register</Button>
                                     </Link> &nbsp;&nbsp;
-                                    <Link to="/users">
-                                        <Button color="primary" className="mt-3" active tabIndex={1}>UserList</Button>
+                                    <Link to="/assignments">
+                                        <Button color="primary" className="mt-3" active tabIndex={1}>Assignments</Button>
                                     </Link> &nbsp;&nbsp;
-                                    <Button color="primary" className="mt-3" active tabIndex={2} onClick={addDumpData}>DumpData</Button>
+                                    <Button color="primary" className="mt-3" active tabIndex={2} onClick={addDumpData}>DumpData</Button>&nbsp;&nbsp;
+                                    <Button color="primary" className="mt-3" active tabIndex={1} onClick={logout}>Logout</Button>
                                 </div>
                             </CardBody>
                         </Card>

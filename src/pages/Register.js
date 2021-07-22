@@ -1,26 +1,28 @@
 import React, {useState} from 'react'
-import {Link, useHistory} from "react-router-dom"
+import {useHistory} from "react-router-dom"
 import axios from 'axios';
 import {Button, Container, Form} from 'react-bootstrap';
+import '../assets/css/Register.css'
+
 
 const Register = () => {
     let history = useHistory();
     const [user, setUser] = useState({
-        'title': '',
-        'firstName': '',
-        'lastName': '',
+        'type': '',
+        'userName': '',
         'email': '',
+        'password': ''
     });
     const [err, setErr] = useState({
-        'firstName': false,
-        'lastName': false,
+        'userName': false,
         'email': false,
-        'title': false
+        'password': false,
+        'confirmPwd': false
     })
 
 //Check validation each time a user enters Input.
     const handleInputChange = (keyName, e) => {
-        if (keyName === 'firstName' || keyName === 'lastName') {
+        if (keyName === 'userName') {
             let regex = new RegExp(/^[a-zA-Z0-9]*$/); //check the alpha-numeric characters.
             if (!regex.test(e.target.value)) {
                 setErr({...err, [keyName]: true});
@@ -32,57 +34,85 @@ const Register = () => {
                 setErr({...err, [keyName]: true});
                 return;
             }
+        } else if (keyName === "password") {
+            let regex = new RegExp(/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$_!%*#?&])[A-Za-z\d@$_!%*#?&]{8,}$/);  //It allows alphabets, special characters, and at least 8 characters.
+            if (!regex.test(e.target.value)) {
+                setErr({...err, [keyName]: true});
+                return;
+            }
+        } else if (keyName === "confirmPwd") {
+            if (user.password !== e.target.value) {
+                setErr({...err, [keyName]: true});
+                return;
+            }
         }
         setUser({...user, [keyName]: e.target.value});
+        if (keyName === 'type') {
+            setUser({...user, [keyName]: e.target.id.substr(e.target.id.length - 1)});
+        }
+        setErr({...err, [keyName]: false});
     }
 
-    function submitForm(e) {
+    const submitForm = (e) => {
         e.preventDefault();
-        console.log(user);
-        axios.post("/api/add", user).then(res => {
-            console.log(res);
+        axios.post("/signup", user).then(res => {
             if (res.status === 200) {
-                history.push('/users');
+                history.push('/');
             }
-        }).catch(function () {
-            alert("Could not creat account. Please try again");
+        }).catch(e => {
+            alert(e.response.data.message);
         });
     }
 
     return (
         <>
-            <Container>
-                <Link
-                    to={`/`}
-                    title="Go Back"
-                >
-                    <Button>Go Back</Button>
-                </Link>
-                <br/>
-                <br/>
+            <Container className="wrap">
+                <h2>Sign up</h2>
                 <Form onSubmit={submitForm}>
-                    <Form.Group className="mb-3" controlId="formBasicTitle">
-                        <Form.Label>Title:</Form.Label>
-                        <Form.Control type="text" placeholder="Title"
-                                      onChange={(e) => handleInputChange('title', e)} required/>
+                    <Form.Group className="mb-6" controlId="formUserType">
+                        <Form.Check
+                            inline
+                            type="radio"
+                            label="Student"
+                            name="formUserType"
+                            id="type1"
+                            className="student"
+                            onChange={(e) => handleInputChange('type', e)}
+                            required
+                        />
+                        <Form.Check
+                            inline
+                            type="radio"
+                            label="Instructor"
+                            name="formUserType"
+                            id="type2"
+                            onChange={(e) => handleInputChange('type', e)}
+                            required
+                        />
                     </Form.Group>
-                    <Form.Group className="mb-3" controlId="formBasicFirstName">
-                        <Form.Label>Firstname:</Form.Label>
-                        <Form.Control type="text" placeholder="FirstName"
-                                      onChange={(e) => handleInputChange('firstName', e)} required/>
-                    </Form.Group>
-                    <Form.Group className="mb-3" controlId="formBasicLastName">
-                        <Form.Label>Lastname:</Form.Label>
-                        <Form.Control type="text" placeholder="LastName"
-                                      onChange={(e) => handleInputChange('lastName', e)} required/>
+                    <Form.Group className="mb-3" controlId="formBasicUserName">
+                        <Form.Control type="text" placeholder="Username"
+                                      isInvalid={!!err.userName}
+                                      onChange={(e) => handleInputChange('userName', e)} required/>
                     </Form.Group>
                     <Form.Group className="mb-3" controlId="formBasicEmail">
-                        <Form.Label>E-mail:</Form.Label>
                         <Form.Control type="email" placeholder="Email"
+                                      isInvalid={!!err.email}
                                       onChange={(e) => handleInputChange('email', e)} required/>
                     </Form.Group>
-                    <Button variant="primary" type="submit">
-                        Submit
+                    <Form.Group className="mb-3" controlId="formBasicPassword">
+                        <Form.Control type="Password" placeholder="Password"
+                                      isInvalid={!!err.password}
+                                      onChange={(e) => handleInputChange('password', e)} required/>
+                    </Form.Group>
+                    <Form.Group className="mb-3" controlId="formBasicPasswordConfirm">
+                        <Form.Control type="Password" placeholder="Password Confirmation"
+                                      isInvalid={!!err.confirmPwd}
+                                      onChange={(e) => handleInputChange('confirmPwd', e)} required/>
+                    </Form.Group>
+
+                    <Button type="submit">
+                        Sign Up
                     </Button>
                 </Form>
             </Container>
