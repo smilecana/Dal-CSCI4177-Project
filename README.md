@@ -55,7 +55,33 @@ By clicking the button below you can signup for Heroku and deploy a working copy
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://hana-park-t4-csci4177.herokuapp.com/)
 
+## Files Created
+### Brady MacDonald
+src/pages/Assignments.js
+src/assets/css/Assingmnes.css
+backend/controllers/assignmentController.js
+backend/models/Assignment.js
+backend/routes/assignments.js
+
 ## Sources Used
+### src/pages/Assignments.js
+Attempted to utilize the example at [AxiosFileUpload] (https://www.codegrepper.com/code-examples/javascript/axios+file+upload)
+
+```
+var formData = new FormData();
+var imagefile = document.querySelector('#file');
+formData.append("image", imagefile.files[0]);
+```
+to adapt the code below 
+
+*Lines - 25 ~ 27*
+
+```
+formData.append("file", e.target.files[0])
+formData.append("fileName", e.target.files[0].name)
+formData.append("assignmentNum", inputNum)
+```
+
 ### authentication.js
 I used jwt for authentication.
 

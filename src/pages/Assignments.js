@@ -22,20 +22,14 @@ const Assignments = (props) => {
         setSubmission({...submission, 'fileName': e.target.files[0].name});
         setSubmission({...submission, 'assignmentNum': inputNum});
 
-        alert(e.target.files[0].name);
-        alert(submission.fileName);
-
+        formData.append("file", e.target.files[0])
         formData.append("fileName", e.target.files[0].name)
-        alert(formData.fileName);
+        formData.append("assignmentNum", inputNum)
     }
 
     const onSubmit = (e) =>  {
         e.preventDefault();
-
-        alert(submission.fileName);
-        alert(formData.fileName);
         
-
         axios.post('/api/upload_file', {
             assignmentNum: submission.assignmentNum, 
             file: "file_content", 
@@ -45,7 +39,7 @@ const Assignments = (props) => {
                 alert("response 200 OK");
             }
             else {
-                alert("Error");
+                alert("Error: ");
                 alert(res.data.message);
             }
         }).catch(e => {
@@ -56,7 +50,7 @@ const Assignments = (props) => {
 
     return (
         <Container>
-                <Link to={`/home`} title="Go Back">
+                <Link to={`/`} title="Go Back">
                     <Button>Go Back</Button>
                 </Link>
 
