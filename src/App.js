@@ -17,7 +17,7 @@ const App = () => {
                     </Route>
                     }
                     {<PrivateRoute path="/assignments" component={Assignments} auth={authentication()} />}
-                    {<PrivateRoute path="/user/:id" exact component={UserProfile}  data = {authentication()} auth={authentication()} />}
+                    {<PrivateRoute path="/user" exact component={UserProfile}  data = {authentication()} auth={authentication()} />}
                     {<PrivateRoute path="/" exact component={Home} auth={authentication()} />}
                 </Switch>
             </Router>

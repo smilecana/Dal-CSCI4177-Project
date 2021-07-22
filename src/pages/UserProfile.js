@@ -4,16 +4,15 @@ import {Button, Container, Form, FormControl, Image, InputGroup,} from "react-bo
 import axios from "axios";
 import {useParams} from "react-router";
 
-const UserProfile = () => {
+const UserProfile = (props) => {
     let {id} = useParams();
     const [user, setUser] = useState({});
     useEffect(() => {
-        // axios
-        //     .get(`/api/user/${id}`,)
-        //     .then(response => {
-        //         console.log(response);
-        //         return setUser(response.data.users)
-        //     });
+        axios
+            .get(`/api/user/${props.data.id}`,)
+            .then(response => {
+                return setUser(response.data.users)
+            });
     },[]);
 
     const [err, setErr] = useState({
