@@ -1,11 +1,10 @@
-import React, {useEffect, useState} from 'react'
-import {Link, useHistory} from "react-router-dom"
+import React, {useState} from 'react'
+import {Link} from "react-router-dom"
 import axios from 'axios';
 import {Button, Card, Container, Form} from "react-bootstrap";
 import '../assets/css/SignIn.css'
 
-const SignIn = (props) => {
-    let history = useHistory();
+const SignIn = () => {
     const [user, setUser] = useState({
         'email': '',
         'password': ''
@@ -31,28 +30,20 @@ const SignIn = (props) => {
         setUser({...user, [keyName]: e.target.value});
         setErr({...err, [keyName]: false});
     }
-
-    useEffect(() => {
-        if (props.authed) {
-            history.push('/');
-        }
-    })
-
-    const submitForm = (e) =>  {
+    const submitForm = (e) => {
         e.preventDefault();
-
         axios
             .post("/login", {
                 email: user.email,
                 password: user.password,
             }).then(response => {
-            if (response.status) {
+            if (response.status === 200) {
                 alert(response.data.message);
                 localStorage.setItem('lmsToken', response.data.token);
-                history.push('/');
+                window.location = "/"
             }
-        }).catch(function () {
-            alert("Could not creat account. Please try again");
+        }).catch(e => {
+            alert(e.response.data.error);
         });
     }
 
