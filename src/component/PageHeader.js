@@ -9,12 +9,11 @@ const PageHeader = (prop) => {
             window.location = "/"
         }
     }
-    console.log(prop.data);
     return (
         <Navbar className='navWrap'>
             <Container>
                 <Navbar.Brand href="/">
-                    LMS Platform 
+                    LMS Platform
                 </Navbar.Brand>
                 {
                     (Object.keys(prop.data).length !== 0)?(
