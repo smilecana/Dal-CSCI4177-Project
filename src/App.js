@@ -1,8 +1,9 @@
 import React from 'react'
 import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
-import {Assignments, Home, Register, SignIn} from "./pages";
+import {Assignments, Home, Register, SignIn,Grades} from "./pages";
 import PrivateRoute from "./component/PrivateRoute";
 import authentication from "./component/authentication";
+
 
 const App = () => {
     return (
@@ -14,6 +15,7 @@ const App = () => {
                 </Route>
                 }
                 {<PrivateRoute path="/assignments" component={Assignments} auth={authentication()}/>}
+                {<PrivateRoute path="/grades" component={Grades} auth={authentication()}/>}
                 {<PrivateRoute path="/" exact component={Home} auth={authentication()}/>}
             </Switch>
         </Router>
