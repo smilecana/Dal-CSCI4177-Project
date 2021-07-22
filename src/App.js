@@ -6,7 +6,6 @@ import authentication from "./component/authentication";
 import PageHeader from "./component/PageHeader";
 
 const App = () => {
-    console.log(authentication());
     return (
         <>
             <PageHeader data={authentication()}/>
@@ -18,7 +17,7 @@ const App = () => {
                     </Route>
                     }
                     {<PrivateRoute path="/assignments" component={Assignments} auth={authentication()} />}
-                    {<PrivateRoute path="/user-profile" exact component={UserProfile}  data = {authentication()} auth={authentication()} />}
+                    {<PrivateRoute path="/user/:id" exact component={UserProfile}  data = {authentication()} auth={authentication()} />}
                     {<PrivateRoute path="/" exact component={Home} auth={authentication()} />}
                 </Switch>
             </Router>

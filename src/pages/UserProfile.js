@@ -4,15 +4,25 @@ import {Button, Container, Form, FormControl, Image, InputGroup,} from "react-bo
 import axios from "axios";
 import {useParams} from "react-router";
 
-const UserProfile = (props) => {
-    const [user, setUser] = useState({});
+const UserProfile = () => {
+    const {id} = useParams();
+    const [user, setUser] = useState({
+        userName: '',
+        email: '',
+        github: '',
+        web: '',
+        linkedin: '',
+        bio: ''
+    });
     useEffect(() => {
         axios
-            .get(`/api/user/${props.data.id}`,)
+            .get(`/api/user/${id}`,)
             .then(response => {
                 return setUser(response.data.users)
-            });
-    },[props]);
+            }).catch(err => {
+            console.log('Error : ' + err);
+        });
+    });
 
     const [err, setErr] = useState({
         'userName': false,
@@ -30,7 +40,7 @@ const UserProfile = (props) => {
     const submitForm = (e) => {
         e.preventDefault();
         axios
-            .put(`/api/user/${props.data.id}`, user).then(res => {
+            .put(`/api/user/${id}`, user).then(res => {
             if (res.status === 200) {
                 alert(res.data.message);
             }
@@ -41,7 +51,7 @@ const UserProfile = (props) => {
     const deleteUser = () => {
         if (window.confirm('Do you want to delete account?')) {
             axios
-                .delete(`/api/user/${props.data.id}`, user).then(res => {
+                .delete(`/api/user/${id}`, user).then(res => {
                 if (res.status === 200) {
                     localStorage.removeItem('lmsToken');
                     if (!localStorage.getItem('lmsToken')) {
