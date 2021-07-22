@@ -22,19 +22,27 @@ I made new branch as [hana-loginAndRegister](https://github.com/Aref19a/4177-pro
 
 The following files are added for user profile management:
 ###View
-* login : SignIn.js
-* register: Register.js
-* UserProfile: UserProfile.js
+src/pages/SignIn.js
 
+src/pages/Register.js
+
+src/pages/UserProfile.js
+
+###css
+src/assets/css/Register.css
+
+src/assets/css/SignIn.css
+
+src/assets/css/Common.css
 ###Routes
-* user.js
+backend/routes/users.js
 ###Models
-* User.js
+backend/models/User.js
 
 ###component
 It also includes user authentication.
-* authentication.js
-* PrivateRoute.js
+* src/component/authentication.js
+* src/component/PrivateRoute.js
 
 # Getting Started with Create React App
 
