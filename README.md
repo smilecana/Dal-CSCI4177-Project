@@ -58,14 +58,18 @@ By clicking the button below you can signup for Heroku and deploy a working copy
 ## Files Created
 ### Brady MacDonald
 src/pages/Assignments.js
+
 src/assets/css/Assingmnes.css
+
 backend/controllers/assignmentController.js
+
 backend/models/Assignment.js
+
 backend/routes/assignments.js
 
 ## Sources Used
 ### src/pages/Assignments.js
-Attempted to utilize the example at [AxiosFileUpload] (https://www.codegrepper.com/code-examples/javascript/axios+file+upload)
+Attempted to utilize the example at [AxiosFileUpload](https://www.codegrepper.com/code-examples/javascript/axios+file+upload)
 
 ```
 var formData = new FormData();
