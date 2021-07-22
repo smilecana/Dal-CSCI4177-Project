@@ -44,6 +44,9 @@ const Home = () => {
                                     <Link to="/assignments">
                                         <Button color="primary" className="mt-3" active tabIndex={1}>Assignments</Button>
                                     </Link> &nbsp;&nbsp;
+                                    <Link to="/grades">
+                                        <Button color="primary" className="mt-3" active tabIndex={1}>Grades</Button>
+                                    </Link> &nbsp;&nbsp;
                                     <Button color="primary" className="mt-3" active tabIndex={2} onClick={addDumpData}>DumpData</Button>&nbsp;&nbsp;
                                     <Button color="primary" className="mt-3" active tabIndex={1} onClick={logout}>Logout</Button>
                                 </div>
