@@ -11,14 +11,13 @@ const App = () => {
             <PageHeader data={authentication()}/>
             <Router>
                 <Switch>
-                    {<Route path="/register" component={Register}/>}
+                    {<Route path="/register" component={UserProfile}/>}
                     {<Route path="/login" exact>
                         <SignIn auth={authentication()} />
-                    </Route>}
+                    </Route>
+                    }
                     {<PrivateRoute path="/assignments" component={Assignments} auth={authentication()} />}
-                    {<PrivateRoute path="/user">
-                        {<PrivateRoute path="/:id" component={UserProfile}  data = {authentication()} auth={authentication()} />}
-                    </PrivateRoute>}
+                    {<PrivateRoute path="/:id" component={UserProfile}  data = {authentication()} auth={authentication()} />}
                     {<PrivateRoute path="/" exact component={Home} auth={authentication()} />}
                 </Switch>
             </Router>

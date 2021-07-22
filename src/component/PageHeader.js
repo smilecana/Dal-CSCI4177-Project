@@ -18,7 +18,7 @@ const PageHeader = (prop) => {
                 {
                     (Object.keys(prop.data).length !== 0)?(
                         <NavDropdown id="basic-nav-dropdown" title={prop.data.email}>
-                            <NavDropdown.Item href={"/user/" + prop.data.id}>Profile</NavDropdown.Item>
+                            <NavDropdown.Item href={"/" + prop.data.id}>Profile</NavDropdown.Item>
                             <NavDropdown.Item onClick={logout}>Logout</NavDropdown.Item>
                         </NavDropdown>
                     ):''
