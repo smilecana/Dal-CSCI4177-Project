@@ -1,147 +1,124 @@
 //Brady MacDonald
-//B00719432
 
 import axios from 'axios';
-import React,{Component} from 'react';
+import React, {useState} from 'react';
 import {Button, Container, Form,} from 'react-bootstrap';
-import {Link, useHistory} from "react-router-dom";
-import {Col, Row} from 'react-bootstrap';
+import {Link} from "react-router-dom";
 
-class Assignments extends Component {
-  
-    state = {
-      // Initially, no file is selected
-      selectedFile: null
-    };
+const Assignments = (props) => {
     
-    // On file select (from the pop up)
-    onFileChange = event => {
-        alert("onFileChange");
-        // Update the state
-        this.setState({ selectedFile: event.target.files[0] });
-    };
+    const formData = new FormData();
     
-    // On file upload (click the upload button)
-    onFileUpload = () => {
-        alert("onFileUpload");
-        
-        // Create an object of formData
-        const formData = new FormData();
-    
-        if (this.state.selectedFile) {
-            // Update the formData object
-            formData.append(
-            "UserFile",
-            this.state.selectedFile,
-            this.state.selectedFile.name
-            );
 
-            // Details of the uploaded file
-            console.log(this.state.selectedFile);
-    
-            // Request made to the backend api
-            // Send formData object
-            //axios.post("api/uploadfile", formData);
-            axios.post("api/uploadfile", formData).then(res => {
-                if (res.status === 200) {
-                    alert('file uploaded success!');
-                    //history.push('/users');
-                }
-                else {alert("failure");}
-                }).catch(function () {
-                    alert("Could not upload submission. Please try again");
-                });
-        }
-        else{
-            alert("Select a file before uploading. ");
-        }
-    };
-    
-    // File content to be displayed after
-    // file upload is complete
-    fileData = () => {
-        if (this.state.selectedFile) {
-        return (
-            <div>
-                <h2>File Details:</h2>     
-                <p>File Name: {this.state.selectedFile.name}</p>   
-                <p>File Type: {this.state.selectedFile.type}</p>           
-                <p>
-                    Last Modified:{" "}
-                    {this.state.selectedFile.lastModifiedDate.toDateString()}
-                </p>
-            </div>
-        );
-        } else {
-            return (
-                <div>
-                    <br />
-                </div>
-            );
-        }
-    };
-    
-    render() {
-        return (
-            <Container>
+    const [submission, setSubmission] = useState({
+        'assignmentNum': '',
+        'file': null,
+        'fileName': ''
+    });
+
+    const onInputChange = (inputNum, e) => {
+
+        setSubmission({...submission, 'file': e.target.files[0]});
+        setSubmission({...submission, 'fileName': 'e.target.files[0].name'});
+        setSubmission({...submission, 'assignmentNum': inputNum});
+
+        alert(submission.fileName);
+
+        formData.append("fileName", e.target.files[0].name)
+        alert(formData.fileName);
+    }
+
+    const onSubmit = (e) =>  {
+        alert(submission.assignmentNum);
+
+        alert(submission.fileName);
+        e.preventDefault();
+
+        axios.post('/api/upload_file', {
+            assignmentNum: submission.assignmentNum, 
+            file: "file_content", 
+            fileName: submission.fileName
+        }).then(res => { 
+            if (res.status === 200) {
+                alert("response 200 OK");
+            }
+            else {
+                alert("Error");
+                alert(res.data.message);
+            }
+        }).catch(e => {
+            alert("Could not submit assignment. Please try again");
+            alert(e);
+        });
+    }
+
+    return (
+        <Container>
                 <Link to={`/home`} title="Go Back">
                     <Button>Go Back</Button>
                 </Link>
 
-                <div class="container">
-                    <div class="row">
-                        <div class="col">
-                            <h3>Assignment</h3>
-                        </div>
-                        <div class="col-6">
-                            <h3>Submission</h3>
-                        </div>
-                        <div class="col">
-                            <h3>Due Date</h3>
-                        </div>
-                        <div class="col">
-                            <h3>Grade</h3>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            Assignent #1
-                        </div>
-                        <div class="col-6">
-                            <div>
-                                <input type="file" onChange={this.onFileChange} />
-                                <button onClick={this.onFileUpload}>Upload!</button>
-                            </div>
-                        </div>
-                        <div class="col">
-                            today
-                        </div>
-                        <div class="col">
-                            A+
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">
-                            Assignent #2
-                        </div>
-                        <div class="col-6">
-                            <div>
-                                <input type="file" onChange={this.onFileChange} />
-                                <button onClick={this.onFileUpload}>Upload!</button>
-                            </div>
-                        </div>
-                        <div class="col">
-                            today
-                        </div>
-                        <div class="col">
-                            B+
-                        </div>
-                    </div>
-                </div>
-                {this.fileData()}
-            </Container>
-      );
-    }
-  }
- 
-  export default Assignments;
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Assignment</th>
+                            <th scope="col">Submission</th>
+                            <th scope="col">Due Date</th>
+                            <th scope="col">Grade</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>Assignment 1</td>
+                        <td>
+                            <Form onSubmit={onSubmit}>
+                                <Form.Group className="mb-3" controlId="formBasicFile">
+                                <Form.Control type="file"
+                                      onChange={(e) => onInputChange("Assignment 1", e)} required/>
+                                </Form.Group>
+                                <Button variant="primary" type="submit">
+                                    Upload
+                                </Button>
+                            </Form>
+                        </td> 
+                        <td>July-30th</td>
+                        <td>A+</td>
+                    </tr>
+                    <tr>
+                        <td>Assignment 2</td>
+                        <td>
+                            <Form onSubmit={onSubmit}>
+                                <Form.Group className="mb-3" controlId="formBasicFile">
+                                <Form.Control type="file"
+                                      onChange={(e) => onInputChange("Assignment 2", e)} required/>
+                                </Form.Group>
+                                <Button variant="primary" type="submit">
+                                    Upload
+                                </Button>
+                            </Form>
+                        </td> 
+                        <td>August-4th</td>
+                        <td>-</td>
+                    </tr>
+                    <tr>
+                        <td>Assignment 3</td>
+                        <td>
+                            <Form onSubmit={onSubmit}>
+                                <Form.Group className="mb-3" controlId="formBasicFile">
+                                <Form.Control type="file"
+                                      onChange={(e) => onInputChange("Assignment 3", e)} required/>
+                                </Form.Group>
+                                <Button variant="primary" type="submit">
+                                    Upload
+                                </Button>
+                            </Form>
+                        </td> 
+                        <td>August-6th</td>
+                        <td>-</td>
+                    </tr>
+                    </tbody>
+                </table>
+        </Container>
+    )
+};
+export default Assignments;
