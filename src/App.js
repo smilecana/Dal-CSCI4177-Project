@@ -6,6 +6,7 @@ import authentication from "./component/authentication";
 import PageHeader from "./component/PageHeader";
 
 const App = () => {
+    console.log(authentication());
     return (
         <>
             <PageHeader data={authentication()}/>

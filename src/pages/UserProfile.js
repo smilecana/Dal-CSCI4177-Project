@@ -5,7 +5,6 @@ import axios from "axios";
 import {useParams} from "react-router";
 
 const UserProfile = (props) => {
-    let {id} = useParams();
     const [user, setUser] = useState({});
     useEffect(() => {
         axios
@@ -31,7 +30,7 @@ const UserProfile = (props) => {
     const submitForm = (e) => {
         e.preventDefault();
         axios
-            .put(`/api/user/${id}`, user).then(res => {
+            .put(`/api/user/${props.data.id}`, user).then(res => {
             if (res.status === 200) {
                 alert(res.data.message);
             }
@@ -42,7 +41,7 @@ const UserProfile = (props) => {
     const deleteUser = () => {
         if (window.confirm('Do you want to delete account?')) {
             axios
-                .delete(`/api/user/${id}`, user).then(res => {
+                .delete(`/api/user/${props.data.id}`, user).then(res => {
                 if (res.status === 200) {
                     localStorage.removeItem('lmsToken');
                     if (!localStorage.getItem('lmsToken')) {
