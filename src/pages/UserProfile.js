@@ -8,12 +8,12 @@ const UserProfile = () => {
     let {id} = useParams();
     const [user, setUser] = useState({});
     useEffect(() => {
-        axios
-            .get(`/api/user/${id}`,)
-            .then(response => {
-                console.log(response);
-                return setUser(response.data.users)
-            });
+        // axios
+        //     .get(`/api/user/${id}`,)
+        //     .then(response => {
+        //         console.log(response);
+        //         return setUser(response.data.users)
+        //     });
     },[]);
 
     const [err, setErr] = useState({
