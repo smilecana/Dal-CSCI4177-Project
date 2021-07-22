@@ -14,7 +14,7 @@ const PageHeader = (prop) => {
         <Navbar className='navWrap'>
             <Container>
                 <Navbar.Brand href="/">
-                    LMS Platform
+                    LMS Platform 
                 </Navbar.Brand>
                 {
                     (Object.keys(prop.data).length !== 0)?(
