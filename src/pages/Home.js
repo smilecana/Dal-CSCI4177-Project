@@ -1,58 +1,69 @@
 import {
-    Button,
-    Card,
-    CardBody,
-    CardGroup,
-    Col,
-    Container,
-    Row
-} from 'reactstrap';
-import {Link} from 'react-router-dom';
-import React from 'react';
-import axios from "axios";
+  Button,
+  Card,
+  CardBody,
+  CardGroup,
+  Col,
+  Container,
+  Row,
+} from "reactstrap";
+import { Link } from "react-router-dom";
+import React from "react";
 
 const Home = () => {
-    function addDumpData(e) {
-        e.preventDefault();
-        axios
-            .post(`/api/dump`)
-            .then(res => {
-                if (res.status === 200) {
-                    alert('added dump data');
-                }
-            });
-    }
-    function logout() {
-       localStorage.removeItem('lmsToken');
-       if (!localStorage.getItem('lmsToken')) {
-           window.location = "/"
-       }
-    }
-
-    return (
-        <Container>
-            <Row className="justify-content-center">
-                <Col md="8">
-                    <CardGroup>
-                        <Card className="text-white bg-primary py-5 d-md-down-none" style={{width: '44%'}}>
-                            <CardBody className="text-center">
-                                <div>
-                                    <h2>Learning Platform</h2>
-                                    <Link to="/register">
-                                        <Button color="primary" className="mt-3" active tabIndex={0}>Register</Button>
-                                    </Link> &nbsp;&nbsp;
-                                    <Link to="/assignments">
-                                        <Button color="primary" className="mt-3" active tabIndex={1}>Assignments</Button>
-                                    </Link> &nbsp;&nbsp;
-                                    <Button color="primary" className="mt-3" active tabIndex={2} onClick={addDumpData}>DumpData</Button>&nbsp;&nbsp;
-                                    <Button color="primary" className="mt-3" active tabIndex={1} onClick={logout}>Logout</Button>
-                                </div>
-                            </CardBody>
-                        </Card>
-                    </CardGroup>
-                </Col>
-            </Row>
-        </Container>
-    )
+  return (
+    <>
+      <Container>
+        <Row className="justify-content-center">
+          <Col md="8">
+            <CardGroup>
+              <Card
+                className="text-white bg-primary py-5 d-md-down-none"
+                style={{ width: "44%" }}
+              >
+                <CardBody className="text-center">
+                  <div>
+                    <Link to="/register">
+                      <Button
+                        color="primary"
+                        className="mt-3"
+                        active
+                        tabIndex={0}
+                      >
+                        Register
+                      </Button>
+                    </Link>{" "}
+                    &nbsp;&nbsp;
+                    <Link to="/assignments">
+                      <Button
+                        color="primary"
+                        className="mt-3"
+                        active
+                        tabIndex={1}
+                      >
+                        Assignments
+                      </Button>
+                    </Link>{" "}
+                    &nbsp;&nbsp;
+                    <Link to="/grades">
+                      <Button
+                        color="primary"
+                        className="mt-3"
+                        active
+                        tabIndex={1}
+                      >
+                        Grades
+                      </Button>
+                    </Link>{" "}
+                    &nbsp;&nbsp;
+                  </div>
+                </CardBody>
+              </Card>
+            </CardGroup>
+          </Col>
+        </Row>
+      </Container>
+    </>
+  );
 };
-export default Home
+export default Home;

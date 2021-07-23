@@ -1,11 +1,10 @@
-const jsonwebtoken = require('jsonwebtoken');
+const jsonwebtoken = require("jsonwebtoken");
 
-const authentication = () => {
-    if (localStorage.getItem('lmsToken')) {
-        const decode = jsonwebtoken.verify(localStorage.getItem('lmsToken'), 'lmsPlatform');
-        return !!decode;
-    }
-    return false;
-}
+const authentication = (auth) => {
+  if (localStorage.getItem("lmsToken")) {
+    auth = jsonwebtoken.verify(localStorage.getItem("lmsToken"), "lmsPlatform");
+    return auth;
+  }
+  return {};
+};
 export default authentication;
-
