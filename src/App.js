@@ -3,6 +3,7 @@ import {BrowserRouter as Router, Route, Switch} from "react-router-dom";
 import {Assignments, Home, Register, SignIn} from "./pages";
 import PrivateRoute from "./component/PrivateRoute";
 import authentication from "./component/authentication";
+import Profile from "./pages/Profile";
 
 const App = () => {
     return (
