@@ -2,10 +2,10 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../models/User');
-const data = require('../dump');
-const mongoose = require("mongoose");
 
-//find user by Email
+
+//All user list
+
 router.get('/', (req, res) => {
     try {
         let email = req.body;
@@ -31,9 +31,10 @@ router.get('/', (req, res) => {
     }
 } )
 //find user by Id
-router.get('/:id', (req, res) => {
+
+router.get('/:userId', (req, res) => {
     try {
-        User.findById(req.params['id'])
+        User.findById(req.params['userId'])
             .then(users => {
                 if (!users) {
                     return res.status(404).send({
@@ -63,7 +64,7 @@ router.get('/:id', (req, res) => {
     }
 })
 //Modified User
-router.put('/:id', (req, res) => {
+router.put('/:userId', (req, res) => {
     try {
         const {userName, bio,github,linkedin,web} = req.body;
         if (!userName) {
@@ -79,7 +80,7 @@ router.put('/:id', (req, res) => {
             linkedin: github,
             web: web
         };
-        User.findByIdAndUpdate(req.params['id'], {$set: updateUser}, function (err, model) {
+        User.findByIdAndUpdate(req.params['userId'], {$set: updateUser}, function (err, model) {
             if (err) {
                 return res.status(500).send({
                     success: false,
@@ -104,9 +105,9 @@ router.put('/:id', (req, res) => {
     }
 })
 // Delete User
-router.delete('/:id', (req, res) => {
+router.delete('/:userId', (req, res) => {
     try {
-        User.findByIdAndRemove(req.params['id'])
+        User.findByIdAndRemove(req.params['userId'])
             .then(() => {
                 return res.status(200).send({
                     success: true,

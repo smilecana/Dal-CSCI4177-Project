@@ -9,6 +9,7 @@ const PageHeader = (prop) => {
             window.location = "/"
         }
     }
+
     return (
         <Navbar className='navWrap'>
             <Container>
@@ -16,12 +17,12 @@ const PageHeader = (prop) => {
                     LMS Platform
                 </Navbar.Brand>
                 {
-                    (Object.keys(prop.data).length !== 0)?(
+                    (Object.keys(prop.data).length !== 0) ? (
                         <NavDropdown id="basic-nav-dropdown" title={prop.data.email}>
-                            <NavDropdown.Item href={"/" + prop.data.id}>Profile</NavDropdown.Item>
+                            <NavDropdown.Item href={'/user/' + prop.data.id}>Profile</NavDropdown.Item>
                             <NavDropdown.Item onClick={logout}>Logout</NavDropdown.Item>
                         </NavDropdown>
-                    ):''
+                    ) : ''
                 }
 
             </Container>

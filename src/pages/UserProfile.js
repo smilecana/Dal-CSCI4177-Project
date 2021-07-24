@@ -15,14 +15,12 @@ const UserProfile = () => {
         bio: ''
     });
     useEffect(() => {
-        // axios
-        //     .get(`/api/user/${id}`,)
-        //     .then(response => {
-        //         return setUser(response.data.users)
-        //     }).catch(err => {
-        //     console.log('Error : ' + err);
-        // });
-    });
+        axios
+            .get(`/api/users/${id}`,)
+            .then(response => {
+                return setUser(response.data.users)
+            });
+    }, [id]);
 
     const [err, setErr] = useState({
         'userName': false,
@@ -40,7 +38,7 @@ const UserProfile = () => {
     const submitForm = (e) => {
         e.preventDefault();
         axios
-            .put(`/api/user/${id}`, user).then(res => {
+            .put(`/api/users/${id}`, user).then(res => {
             if (res.status === 200) {
                 alert(res.data.message);
             }
@@ -51,7 +49,7 @@ const UserProfile = () => {
     const deleteUser = () => {
         if (window.confirm('Do you want to delete account?')) {
             axios
-                .delete(`/api/user/${id}`, user).then(res => {
+                .delete(`/api/users/${id}`, user).then(res => {
                 if (res.status === 200) {
                     localStorage.removeItem('lmsToken');
                     if (!localStorage.getItem('lmsToken')) {

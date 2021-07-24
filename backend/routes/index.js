@@ -8,7 +8,7 @@ const bcrypt = require("bcryptjs")
 const jsonwebtoken = require('jsonwebtoken');
 
 router.use('/api', fileRouters);
-router.use('/api/user', userRoutes);
+router.use('/api/users', userRoutes);
 
 //login
 router.post('/login', async (req, res) => {
