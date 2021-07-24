@@ -9,7 +9,7 @@ const UserProfile = () => {
     const [user, setUser] = useState({});
     useEffect(() => {
         axios
-            .get(`api/user/${id}`,)
+            .get(`/api/user/${id}`,)
             .then(response => {
                 return setUser(response.data.users)
             });
@@ -31,7 +31,7 @@ const UserProfile = () => {
     const submitForm = (e) => {
         e.preventDefault();
         axios
-            .put(`api/user/${id}`, user).then(res => {
+            .put(`/api/user/${id}`, user).then(res => {
             if (res.status === 200) {
                 alert(res.data.message);
             }
@@ -42,7 +42,7 @@ const UserProfile = () => {
     const deleteUser = () => {
         if (window.confirm('Do you want to delete account?')) {
             axios
-                .delete(`api/user/${id}`, user).then(res => {
+                .delete(`/api/user/${id}`, user).then(res => {
                 if (res.status === 200) {
                     localStorage.removeItem('lmsToken');
                     if (!localStorage.getItem('lmsToken')) {

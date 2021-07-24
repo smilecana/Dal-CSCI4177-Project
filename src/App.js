@@ -9,8 +9,8 @@ import PageHeader from "./component/PageHeader";
 const App = () => {
     return (
         <>
-            <PageHeader data={authentication()}/>
             <Router>
+                <PageHeader data={authentication()}/>
                 <Switch>
                     {<Route path="/register" component={Register}/>}
                     {<Route path="/login" exact>
@@ -19,7 +19,7 @@ const App = () => {
                     }
                     {<PrivateRoute path="/assignments" component={Assignments} auth={authentication()} />}
                     {<PrivateRoute path="/grades" component={Grades} auth={authentication()}/>}
-                    {<PrivateRoute path="/:id" exact component={UserProfile}  data = {authentication()} auth={authentication()} />}
+                    {<PrivateRoute path="/user/:id" exact component={UserProfile}  data = {authentication()} auth={authentication()} />}
                     {<PrivateRoute path="/" exact component={Home} auth={authentication()} />}
                 </Switch>
             </Router>
