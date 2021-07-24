@@ -20,7 +20,7 @@ const UserProfile = () => {
             .then(response => {
                 return setUser(response.data.users)
             });
-    }, [id]);
+    }, []);
 
     const [err, setErr] = useState({
         'userName': false,

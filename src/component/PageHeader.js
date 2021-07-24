@@ -1,6 +1,8 @@
 import React from 'react'
 import '../assets/css/Common.css'
 import {Container, Navbar, NavDropdown} from "react-bootstrap";
+import {Link} from "react-router-dom";
+import {Button} from "reactstrap";
 
 const PageHeader = (prop) => {
     function logout() {
@@ -17,12 +19,14 @@ const PageHeader = (prop) => {
                     LMS Platform
                 </Navbar.Brand>
                 {
-                    (Object.keys(prop.data).length !== 0) ? (
+                    (Object.keys(prop.data).length !== 0)?(
                         <NavDropdown id="basic-nav-dropdown" title={prop.data.email}>
-                            <NavDropdown.Item href={'/user/' + prop.data.id}>Profile</NavDropdown.Item>
+                            <NavDropdown.Item as={Link} to={'/user/' + prop.data.id}>
+                                Profile
+                            </NavDropdown.Item>
                             <NavDropdown.Item onClick={logout}>Logout</NavDropdown.Item>
                         </NavDropdown>
-                    ) : ''
+                    ):''
                 }
 
             </Container>

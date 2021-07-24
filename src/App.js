@@ -9,8 +9,8 @@ import PageHeader from "./component/PageHeader";
 const App = () => {
     return (
         <>
-            <PageHeader data={authentication()}/>
             <Router>
+                <PageHeader data={authentication()}/>
                 <Switch>
                     {<Route path="/register" component={Register}/>}
                     {<Route path="/login" exact>
