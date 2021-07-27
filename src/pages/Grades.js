@@ -19,7 +19,7 @@ const Grades = (props) => {
   return (
     <Container>
       <Link to={`/`} title="Go Back">
-        <Button>Go Back</Button>
+        <Button variant="outline-primary" className="mt-2 mb-2">Go Back</Button>
       </Link>
 
       <table class="table table-striped">

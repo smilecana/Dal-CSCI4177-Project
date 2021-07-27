@@ -51,7 +51,7 @@ const Assignments = (props) => {
   return (
     <Container>
       <Link to={`/`} title="Go Back">
-        <Button>Go Back</Button>
+        <Button variant="outline-primary mt-2 mb-2 ">Go Back</Button>
       </Link>
 
       <table class="table table-striped">
@@ -75,7 +75,7 @@ const Assignments = (props) => {
                     required
                   />
                 </Form.Group>
-                <Button variant="primary" type="submit">
+                <Button variant="outline-primary" type="submit">
                   Upload
                 </Button>
               </Form>
@@ -94,7 +94,7 @@ const Assignments = (props) => {
                     required
                   />
                 </Form.Group>
-                <Button variant="primary" type="submit">
+                <Button variant="outline-primary" type="submit">
                   Upload
                 </Button>
               </Form>
@@ -113,7 +113,7 @@ const Assignments = (props) => {
                     required
                   />
                 </Form.Group>
-                <Button variant="primary" type="submit">
+                <Button variant="outline-primary" type="submit">
                   Upload
                 </Button>
               </Form>
