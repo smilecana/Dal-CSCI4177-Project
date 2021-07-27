@@ -3,40 +3,8 @@ const express = require('express');
 const router = express.Router();
 const User = require('../models/User');
 const data = require('../dump');
-const mongoose = require("mongoose");
+require("mongoose");
 
-//All user list
-router.get('/users', (req, res) => {
-    try {
-        User.find().exec().then(users => {
-            if (!users.length) {
-                return res.status(404).send({
-                    success: false,
-                    message: "No user found",
-                })
-            }
-            return res.status(200).send({
-                success: true,
-                message: "Users retrieved",
-                "users": users
-            })
-        })
-            .catch(e => {
-                    console.error(e);
-                    return res.status(500).send({
-                        success: false,
-                        message: "Something went wrong"
-                    })
-                }
-            )
-    } catch (e) {
-        return res.status(500).json({
-            success: false,
-            message: "Internal server error",
-        })
-    }
-
-})
 //find user by Email
 router.get('/user', (req, res) => {
     let email = req.body;

@@ -65,6 +65,12 @@ const UserProfile = () => {
                                       isInvalid={!!err.userName}
                                       onChange={(e) => handleInputChange('userName', e)} required/>
                     </Form.Group>
+                    <Form.Group className="mb-3" controlId="formBasicUserEmail">
+                        <Form.Control type="text" placeholder="User Email"
+                                      value={user.email}
+                                      isInvalid={!!err.email}
+                                      onChange={(e) => handleInputChange('email', e)} required disabled={true}/>
+                    </Form.Group>
                     <Form.Group className="mb-3" controlId="formBasicUserBio">
                         <Form.Control
                             as="textarea"

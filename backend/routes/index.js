@@ -2,6 +2,7 @@
 const router = require('express').Router();
 const userRoutes = require('./users');
 const fileRouters = require('./assignments');
+const adminRoutes = require('./admin');
 const User = require('../models/User');
 
 const bcrypt = require("bcryptjs")
@@ -9,6 +10,8 @@ const jsonwebtoken = require('jsonwebtoken');
 
 router.use('/api', userRoutes);
 router.use('/api', fileRouters);
+router.use('/api/admin', adminRoutes);
+
 
 //login
 router.post('/login', async (req, res) => {

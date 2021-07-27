@@ -4,6 +4,7 @@ import Register from './Register'
 import Assignments from './Assignments'
 import Grades from './Grades'
 import UserProfile from "./UserProfile";
+import UserLists from "./admin/UserLists";
 
 export {
     SignIn,
@@ -11,5 +12,6 @@ export {
     Home,
     Register,
     Grades,
-    UserProfile
+    UserProfile,
+    UserLists
 };

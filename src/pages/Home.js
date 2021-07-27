@@ -31,6 +31,9 @@ const Home = () => {
                                         <Link to="/grades">
                                             <Button color="primary" className="mt-3" active tabIndex={1}>Grades</Button>
                                         </Link> &nbsp;&nbsp;
+                                        <Link to="/admin/users">
+                                            <Button color="primary" className="mt-3" active tabIndex={1}>UserList</Button>
+                                        </Link> &nbsp;&nbsp;
                                     </div>
                                 </CardBody>
                             </Card>

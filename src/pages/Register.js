@@ -1,5 +1,5 @@
 import React, {useState} from 'react'
-import {useHistory} from "react-router-dom"
+import {useHistory, useRouteMatch} from "react-router-dom"
 import axios from 'axios';
 import {Button, Container, Form} from 'react-bootstrap';
 import '../assets/css/Register.css'
@@ -7,6 +7,7 @@ import '../assets/css/Register.css'
 
 const Register = () => {
     let history = useHistory();
+    const { path } = useRouteMatch();
     const [user, setUser] = useState({
         'type': '',
         'userName': '',
@@ -58,7 +59,11 @@ const Register = () => {
         axios.post("/signup", user).then(res => {
             if (res.status === 200) {
                 alert(res.data.message);
-                history.push('/');
+                if (path === '/admin/user/add')
+                    history.push('/admin/users');
+                else
+                    history.push('/');
+
             }
         }).catch(e => {
             alert(e.response.data.message);
