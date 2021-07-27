@@ -7,6 +7,7 @@ import {
   SignIn,
   Grades,
   UserProfile,
+  Calendar,
 } from "./pages";
 import PrivateRoute from "./component/PrivateRoute";
 import authentication from "./component/authentication";
@@ -28,6 +29,14 @@ const App = () => {
             <PrivateRoute
               path="/assignments"
               component={Assignments}
+              auth={authentication()}
+            />
+          }
+          {
+            <PrivateRoute
+              path="/calendar"
+              exact
+              component={Calendar}
               auth={authentication()}
             />
           }

@@ -20,6 +20,7 @@ const PageHeader = (prop) => {
         <Nav.Link href="/contents">Contents</Nav.Link>
         <Nav.Link href="/assignments">Assignments</Nav.Link>
         <Nav.Link href="/grades">Grades</Nav.Link>
+        <Nav.Link href="/calendar">Calendar</Nav.Link>
 
         {Object.keys(prop.data).length !== 0 ? (
           <NavDropdown className="justify-content-end" id="basic-nav-dropdown" title={prop.data.email}>
