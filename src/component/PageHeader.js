@@ -1,4 +1,3 @@
-
 import React from "react";
 import "../assets/css/Common.css";
 import { Container, Navbar, NavDropdown } from "react-bootstrap";
@@ -10,7 +9,6 @@ const PageHeader = (prop) => {
     if (!localStorage.getItem("lmsToken")) {
       window.location = "/";
     }
-
   }
   return (
     <Navbar collapseOnSelect expand="lg" bg="light" variant="light">
@@ -22,6 +20,8 @@ const PageHeader = (prop) => {
         <Nav.Link href="/contents">Contents</Nav.Link>
         <Nav.Link href="/assignments">Assignments</Nav.Link>
         <Nav.Link href="/grades">Grades</Nav.Link>
+        <Nav.Link href="/calendar">Calendar</Nav.Link>
+
         {Object.keys(prop.data).length !== 0 ? (
           <NavDropdown className="justify-content-end" id="basic-nav-dropdown" title={prop.data.email}>
             <NavDropdown.Item href={prop.data.id}>Profile</NavDropdown.Item>
