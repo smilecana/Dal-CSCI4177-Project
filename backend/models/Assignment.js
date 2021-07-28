@@ -10,7 +10,7 @@ const assignmentSchema = new Schema({
         required: true
     },
     file: {
-        type: String,
+        type: Object,
         required: true
     },
     fileName:{
