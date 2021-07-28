@@ -16,9 +16,9 @@ import PageHeader from "./component/PageHeader";
 const App = () => {
   return (
     <>
-      <PageHeader data={authentication()} />
       <Router>
-        <Switch>
+          <PageHeader data={authentication()} />
+          <Switch>
           {<Route path="/register" component={Register} />}
           {
             <Route path="/login" exact>
@@ -49,7 +49,7 @@ const App = () => {
           }
           {
             <PrivateRoute
-              path="/:id"
+              path="/user/:id"
               exact
               component={UserProfile}
               data={authentication()}
