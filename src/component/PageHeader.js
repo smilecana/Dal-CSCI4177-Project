@@ -19,7 +19,7 @@ const PageHeader = (props) => {
         axios.get(`/api/user/${props.data.id}`).then((response) => {
             return setUser(response.data.users);
         });
-    }, [props, user]);
+    }, [props]);
     return (
         <Navbar collapseOnSelect expand="lg" bg="light" variant="light">
             <Container>

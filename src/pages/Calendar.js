@@ -1,8 +1,9 @@
-import React,{Component, useState, useEffect} from 'react';
+import React,{Component} from 'react';
 import Modal from '../modal/calendarModal.js';
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import "../assets/css/Calendar.css";
+import axios from "axios";
 
 
 class Calendar extends Component {
@@ -10,7 +11,8 @@ class Calendar extends Component {
         super();
         this.state = {
             //hide the modal until the user wants it to show
-            show: false
+            show: false,
+            event: []
         };
         this.showModal = this.showModal.bind(this);
         this.hideModal = this.hideModal.bind(this);
@@ -25,19 +27,13 @@ class Calendar extends Component {
         //set to false
         this.setState({ show: false });
     };
-
-    //getEvents = () => {
-        //const [events, setEvents] = useState([]);
-
-       // useEffect(() => {
-        //axios.get("/api/retrieve_events").then((response) => {
-        //const info = response.data;
-
-       // console.log(info);
-        //return setEvents(info.Event);
-    //});
- // }, []);
-   // }
+    componentDidMount() {
+        axios.get("/api/events").then((response) => {
+        const info = response.data;
+        console.log(info);
+        return this.setState({event: info.Event});
+        })
+    }
 
 
     render(){

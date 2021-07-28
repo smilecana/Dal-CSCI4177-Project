@@ -1,13 +1,27 @@
 //Ryan McInroy
 const router = require('express').Router();
-const Event = require('../models/events');
-const bcrypt = require("bcryptjs");
-const jsonwebtoken = require("jsonwebtoken");
+const Event = require('../models/Event');
 
 
+router.get('/events', (req, res) => {
+    Event.find()
+        .then(event => {
+            if (!event) {
+                return res.status(404).send({
+                    success: false,
+                    message: "No user found",
+                })
+            }
+            return res.send({
+                success: true,
+                "event": event
+            })
+        })
+} )
 //Add Event
-router.post('/add_event', async (req, res) => {
+router.post('/event', async (req, res) => {
     try {
+        console.log(req.body);
         const eventName = req.body.name;
         const eventDate = req.body.date;
 

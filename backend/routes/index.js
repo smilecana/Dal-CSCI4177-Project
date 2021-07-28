@@ -4,13 +4,17 @@ const User = require("../models/User");
 const userRoutes = require("./users");
 const fileRouters = require("./assignments");
 const adminRouters = require("./admin");
+const eventRouters = require("./events");
+
 
 const bcrypt = require("bcryptjs");
 const jsonwebtoken = require("jsonwebtoken");
 
 router.use("/api", userRoutes);
 router.use("/api", fileRouters);
+router.use("/api", eventRouters);
 router.use("/api/admin", adminRouters);
+
 
 
 //login

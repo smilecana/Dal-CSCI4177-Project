@@ -27,27 +27,16 @@ const Modal = ({ handleClose, show, children, onEventAdded }) => {
       }
     })
   }
-  //for when the button is clicked. Console log shows values.
-  function handleClick(event) {
-    event.preventDefault();
-    //In the console we can now see the values that are ready to be sent off.
-    console.log(input);
-  }
-
   //submitting the form
   const onSubmit = (event) => {
     event.preventDefault();
 
     axios
-      .post("/add_event", {
-        name: event.name,
-        date: event.date
-      })
+      .post("/api/event/", input)
       .then((response) => {
         if (response.status === 200) {
           alert(response.data.message);
-          localStorage.setItem("lmsToken", response.data.token);
-          window.location = "/";
+
         }
       })
       .catch((e) => {
@@ -71,7 +60,7 @@ const Modal = ({ handleClose, show, children, onEventAdded }) => {
           <input onChange={handleChange} name="date" value={input.date}></input>
           <br/>
         </Form>
-        <button type="submit" onClick={handleClick, onSubmit}>Submit</button>
+        <button type="submit" onClick={onSubmit}>Submit</button>
         <button type="button" onClick={handleClose}>
           Close
         </button>
