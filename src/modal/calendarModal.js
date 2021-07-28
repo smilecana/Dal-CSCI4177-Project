@@ -2,11 +2,14 @@
 import axios from 'axios';
 import { useState } from 'react';
 import './modal.css';
+import { Button, Container, Form } from "react-bootstrap";
 
 const Modal = ({ handleClose, show, children, onEventAdded }) => {
   //css will depend on if the modal is showing or not
   const showHideClassName = show ? "modal display-block" : "modal display-none";
   
+  const formData = new FormData();
+
   //setting the const of the form. These are the attributes we need.
   const [input, setInput] = useState({
     name: '',
@@ -34,14 +37,22 @@ const Modal = ({ handleClose, show, children, onEventAdded }) => {
   //submitting the form
   const onSubmit = (event) => {
     event.preventDefault();
-    axios.post('/api/addEvent', {
-      name: event.name,
-      date: event.date
-    }).then(response => {
-      alert(response.data.message);
-      localStorage.setItem('lmsToken', response.data.token);
-      
-    })
+
+    axios
+      .post("/add_event", {
+        name: event.name,
+        date: event.date
+      })
+      .then((response) => {
+        if (response.status === 200) {
+          alert(response.data.message);
+          localStorage.setItem("lmsToken", response.data.token);
+          window.location = "/";
+        }
+      })
+      .catch((e) => {
+        alert(e.response.data.error);
+      });
   }
  
 
@@ -51,7 +62,7 @@ const Modal = ({ handleClose, show, children, onEventAdded }) => {
     <div className={showHideClassName}>
       <section className="modal-main">
         {children}
-        <form>
+        <Form>
           <h1>Create an Event</h1>
           <label>Event Name:</label>
           <input onChange={handleChange} name="name" value={input.name}></input>
@@ -59,8 +70,8 @@ const Modal = ({ handleClose, show, children, onEventAdded }) => {
           <label>Date:</label>
           <input onChange={handleChange} name="date" value={input.date}></input>
           <br/>
-        </form>
-        <button type="submit" onClick={handleClick, onSubmit}>Submit</button>
+        </Form>
+        <button type="submit" onClick={handleClick}>Submit</button>
         <button type="button" onClick={handleClose}>
           Close
         </button>

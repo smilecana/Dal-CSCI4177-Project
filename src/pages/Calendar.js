@@ -51,10 +51,3 @@ class Calendar extends Component {
 }
  
 export default Calendar
-//<FullCalendar
-//defaultView="dayGridMonth"
-//plugins={[ dayGridPlugin ]}
-//events={[
-//    { title: 'Canada Day', date: '2021-07-01'}
-//]}
-///>
