@@ -6,6 +6,6 @@
     margin-top: 10px;
     margin-bottom: 10px;
 }
-.btn-group-action  button{
-    margin-right: 10px;
+.danger {
+    color: #F90101FF;
 }

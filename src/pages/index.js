@@ -7,4 +7,5 @@ import UserProfile from "./UserProfile";
 import UserLists from "./admin/UserLists";
 
 
-export { SignIn, Assignments, Home, Register, Grades, UserProfile, UserLists };
+
+export { SignIn, Assignments, Home, Register, Grades, UserProfile, UserLists};

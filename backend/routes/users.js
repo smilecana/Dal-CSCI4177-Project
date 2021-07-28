@@ -57,7 +57,7 @@ router.get('/user/:id', (req, res) => {
 //Modified User
 router.put('/user/:id', (req, res) => {
     try {
-        const {userName, bio,github,linkedin,web} = req.body;
+        const {userName, bio,github,linkedin,web, type} = req.body;
         if (!userName) {
             return res.status(400).send({
                 message: "Missing body params or check the params keys",
@@ -69,7 +69,8 @@ router.put('/user/:id', (req, res) => {
             bio: bio,
             github: github,
             linkedin: github,
-            web: web
+            web: web,
+            type: type
         };
         User.findByIdAndUpdate(req.params['id'], {$set: updateUser}, function (err, model) {
             if (err) {
