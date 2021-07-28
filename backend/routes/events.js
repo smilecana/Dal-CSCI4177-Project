@@ -4,11 +4,12 @@ const Event = require('../models/events');
 const bcrypt = require("bcryptjs");
 const jsonwebtoken = require("jsonwebtoken");
 
+
 //Add Event
-router.post('/add_event', (req, res) => {
+router.post('/add_event', async (req, res) => {
     try {
-        const eventName = req.body.assignmentNum;
-        const eventDate = req.body.file;
+        const eventName = req.body.name;
+        const eventDate = req.body.date;
 
         //Check if the input is empty
         if (!eventName || !eventDate) {

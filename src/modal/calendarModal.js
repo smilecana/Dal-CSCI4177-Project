@@ -71,7 +71,7 @@ const Modal = ({ handleClose, show, children, onEventAdded }) => {
           <input onChange={handleChange} name="date" value={input.date}></input>
           <br/>
         </Form>
-        <button type="submit" onClick={handleClick}>Submit</button>
+        <button type="submit" onClick={handleClick, onSubmit}>Submit</button>
         <button type="button" onClick={handleClose}>
           Close
         </button>

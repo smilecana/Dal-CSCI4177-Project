@@ -26,6 +26,19 @@ class Calendar extends Component {
         this.setState({ show: false });
     };
 
+    //getEvents = () => {
+        //const [events, setEvents] = useState([]);
+
+       // useEffect(() => {
+        //axios.get("/api/retrieve_events").then((response) => {
+        //const info = response.data;
+
+       // console.log(info);
+        //return setEvents(info.Event);
+    //});
+ // }, []);
+   // }
+
 
     render(){
         return(
