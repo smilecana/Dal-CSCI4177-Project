@@ -5,6 +5,7 @@ const bcrypt = require("bcryptjs");
 const jsonwebtoken = require("jsonwebtoken");
 
 
+
 //Add Event
 router.post('/add_event', async (req, res) => {
     try {
