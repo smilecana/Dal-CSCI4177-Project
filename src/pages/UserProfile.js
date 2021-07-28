@@ -19,7 +19,7 @@ const UserProfile = () => {
         axios.get(`/api/user/${id}`).then((response) => {
             return setUser(response.data.users);
         });
-    }, []);
+    }, [id]);
 
     const [err, setErr] = useState({
         userName: false,

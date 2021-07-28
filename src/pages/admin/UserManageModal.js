@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React from "react";
 import "../../assets/css/Admin.css";
 import Button from "react-bootstrap/Button";
 import {Form, FormControl, InputGroup, Modal} from "react-bootstrap";
@@ -35,7 +35,7 @@ const UserManageModal = (props) => {
         <>
             <Modal show={props.show} onHide={props.handleClose}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Modal heading</Modal.Title>
+                    <Modal.Title>{(props.type === 0) ?'Add User':' Edit User'}</Modal.Title>
                 </Modal.Header>
                 <Form onSubmit={addUser}>
                     <Modal.Body>
