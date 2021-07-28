@@ -14,19 +14,18 @@ router.get('/events', (req, res) => {
             }
             return res.send({
                 success: true,
-                "event": event
+                "events": event
             })
         })
 } )
 //Add Event
 router.post('/event', async (req, res) => {
     try {
-        console.log(req.body);
-        const eventName = req.body.name;
+        const eventTitle = req.body.title;
         const eventDate = req.body.date;
 
         //Check if the input is empty
-        if (!eventName || !eventDate) {
+        if (!eventTitle || !eventDate) {
             return res.status(400).send({
                 message: "Missing body",
                 success: false
@@ -34,7 +33,7 @@ router.post('/event', async (req, res) => {
         }
         
         const newEvent = new Event();
-        newEvent.name = eventName;
+        newEvent.title = eventTitle;
         newEvent.date = eventDate;
     
         newEvent.save()
