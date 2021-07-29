@@ -27,7 +27,7 @@ const PageHeader = (props) => {
       bg="light"
       variant="light">
       <Container style={{ maxWidth: "95%" }}>
-        <Navbar.Brand href="/">LMS Platform</Navbar.Brand>
+        <Navbar.Brand href="/"><span style={{fontWeight: "bold"}}>LMS</span>Platform</Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">

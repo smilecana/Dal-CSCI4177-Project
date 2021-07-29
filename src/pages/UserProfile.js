@@ -72,7 +72,7 @@ const UserProfile = () => {
   };
   return (
     <>
-      <Container className="wrap" >
+      <Container className="wrap">
         <Image src="https://picsum.photos/170/170" roundedCircle />
         <Form onSubmit={submitForm}>
           <Form.Group className="mb-3" controlId="formBasicUserName">

@@ -4,6 +4,9 @@ import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import "../assets/css/Calendar.css";
 import { Container } from "react-bootstrap";
+import { Link } from "react-router-dom";
+import Button from "react-bootstrap/Button";
+
 
 class Calendar extends Component {
   constructor() {
@@ -30,12 +33,16 @@ class Calendar extends Component {
     return (
       <Container
         style={{
-            backgroundColor: "#ffffff",
-            opacity: "1",
-            backgroundImage: "repeating-radial-gradient( circle at 0 0, transparent 0, #ffffff 17px ), repeating-linear-gradient( #f4f6fe55, #f4f6fe )",
-            height: "100vh",
-            maxWidth: "100%",
+          backgroundColor: "#ffffff",
+          opacity: "1",
+          backgroundImage:
+            "repeating-radial-gradient( circle at 0 0, transparent 0, #ffffff 17px ), repeating-linear-gradient( #f4f6fe55, #f4f6fe )",
+          height: "100vh",
+          maxWidth: "100%",
         }}>
+        <Link to={`/`} title="Go Back">
+          <Button variant="outline-primary mt-2 mb-2 ">Go Back</Button>
+        </Link>
         <div id="calendar">
           <main>
             <Modal show={this.state.show} handleClose={this.hideModal}></Modal>
