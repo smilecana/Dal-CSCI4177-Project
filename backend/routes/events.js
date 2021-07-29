@@ -1,17 +1,31 @@
 //Ryan McInroy
 const router = require('express').Router();
-const Event = require('../models/events');
-const bcrypt = require("bcryptjs");
-const jsonwebtoken = require("jsonwebtoken");
+const Event = require('../models/Event');
 
+
+router.get('/events', (req, res) => {
+    Event.find()
+        .then(event => {
+            if (!event) {
+                return res.status(404).send({
+                    success: false,
+                    message: "No user found",
+                })
+            }
+            return res.send({
+                success: true,
+                "events": event
+            })
+        })
+} )
 //Add Event
-router.post('/add_event', (req, res) => {
+router.post('/event', async (req, res) => {
     try {
-        const eventName = req.body.assignmentNum;
-        const eventDate = req.body.file;
+        const eventTitle = req.body.title;
+        const eventDate = req.body.date;
 
         //Check if the input is empty
-        if (!eventName || !eventDate) {
+        if (!eventTitle || !eventDate) {
             return res.status(400).send({
                 message: "Missing body",
                 success: false
@@ -19,7 +33,7 @@ router.post('/add_event', (req, res) => {
         }
         
         const newEvent = new Event();
-        newEvent.name = eventName;
+        newEvent.title = eventTitle;
         newEvent.date = eventDate;
     
         newEvent.save()
