@@ -1,62 +1,89 @@
 import { Col, Container, Row } from "react-bootstrap";
 import Card from "react-bootstrap/Card";
-import Button from 'react-bootstrap/Button'
-import React from "react";
+import Button from "react-bootstrap/Button";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router";
+import axios from "axios";
 
-const Home = () => {
+const Home = (props) => {
+  const [user, setUser] = useState("");
+  useEffect(() => {
+    axios.get(`/api/user/${props.data.id}`).then((response) => {
+      return setUser(response.data.users);
+    });
+  }, [props, user]);
+
   return (
     <>
-      <Container>
-        <Row><h1>Hello (add username here)</h1></Row>
+      <Container
+        style={{
+          backgroundColor: "#ffffff",
+          opacity: "1",
+          backgroundImage:
+            "repeating-radial-gradient( circle at 0 0, transparent 0, #ffffff 17px ), repeating-linear-gradient( #f4f6fe55, #f4f6fe )",
+          height: "100vh",
+          maxWidth: "100%",
+        }}>
+        <Row>
+          <h1 style={{ color: "" }} className="py-2 px-4">
+            Hello, {props.data.email}
+          </h1>
+        </Row>
         <Row xs={1} md={2} lg={4} className="align-items-center">
-          <Col className="mt-2">
-            <Card>
+          <Col>
+            <Card className="my-1">
               <Card.Body>
-                <Card.Title>Course Content</Card.Title>
-                <Card.Text>
-                  Some quick example text to build on the card title and make up
-                  the bulk of the card's content.
-                </Card.Text>
-                <Button variant="outline-primary">Go somewhere</Button>
+                <Card.Title
+                  className="p-2 rounded"
+                  style={{ backgroundColor: "#0d6efd", color: "white" }}>
+                  Calendar
+                </Card.Title>
+                <Card.Text>Access your calendar here!</Card.Text>
+                <Button variant="outline-primary">Go to Calendar</Button>
               </Card.Body>
             </Card>
           </Col>
-          <Col className="mt-2">
+          <Col>
             {" "}
-            <Card>
+            <Card className="my-1">
               <Card.Body>
-                <Card.Title>Assignments</Card.Title>
-                <Card.Text>
-                  Some quick example text to build on the card title and make up
-                  the bulk of the card's content.
-                </Card.Text>
-                <Button variant="outline-primary">Go somewhere</Button>
+                <Card.Title
+                  className="p-2 rounded"
+                  style={{ backgroundColor: "#0d6efd", color: "white" }}>
+                  Assignments
+                </Card.Title>
+                <Card.Text>Your assignments are here. Don't be late!</Card.Text>
+                <Button variant="outline-primary">Go to Assingments</Button>
               </Card.Body>
             </Card>
           </Col>
-          <Col className="mt-2">
+          <Col>
             {" "}
-            <Card>
+            <Card className="my-1">
               <Card.Body>
-                <Card.Title>Grades</Card.Title>
-                <Card.Text>
-                  Some quick example text to build on the card title and make up
-                  the bulk of the card's content.
-                </Card.Text>
-                <Button variant="outline-primary">Go somewhere</Button>
+                <Card.Title
+                  className="p-2 rounded"
+                  style={{ backgroundColor: "#0d6efd", color: "white" }}>
+                  Grades
+                </Card.Title>
+                <Card.Text>You can see your grades here!</Card.Text>
+                <Button variant="outline-primary">Go to Grades</Button>
               </Card.Body>
             </Card>
           </Col>
-          <Col className="mt-2">
+          <Col>
             {" "}
-            <Card>
+            <Card className="my-1">
               <Card.Body>
-                <Card.Title>Profile</Card.Title>
+                <Card.Title
+                  className="p-2 rounded"
+                  style={{ backgroundColor: "#0d6efd", color: "white" }}>
+                  Profile
+                </Card.Title>
                 <Card.Text>
-                  Some quick example text to build on the card title and make up
-                  the bulk of the card's content.
+                  Here you can see and edit your profile. Keep it fresh!
                 </Card.Text>
-                <Button variant="outline-primary">Go somewhere</Button>
+                <Button variant="outline-primary">Go to Profile</Button>
               </Card.Body>
             </Card>
           </Col>
