@@ -7,6 +7,7 @@ const port = process.env.PORT || 5000;
 
 //middleware
 app.use(bodyParser.json());
+app.use(express.json())
 app.use(routes);
 
 // Serve up static assets (usually on heroku)
