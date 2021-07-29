@@ -5,9 +5,7 @@ const Assignment = require("../models/Assignment");
 const mongoose = require("mongoose");
 
 const multer = require('multer');
-//const GridFsStorage = require('multer-gridfs-storage');
-
-const upload = multer({ });
+const upload = multer({  });
 
 //Add file
 router.post("/upload_file", upload.single('file'), (req, res) => {
@@ -23,6 +21,7 @@ router.post("/upload_file", upload.single('file'), (req, res) => {
     console.log(assignmentNumber);
     console.log(fileName);
     console.log(file);
+
     //Check input is not empty
     if (!fileName || !assignmentNumber) {
       return res.status(400).send({

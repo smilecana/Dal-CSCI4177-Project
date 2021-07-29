@@ -14,19 +14,15 @@ const Assignments = (props) => {
         formData.append("file", e.target.files[0]);
         formData.append("fileName", e.target.files[0].name);
         formData.append("assignmentNum", inputNum);
-
-        //alert(formData.get("fileName"));
     }
 
     const onSubmit = (e) =>  {
         e.preventDefault();
         
-        //alert(formData.get("fileName"));
-
         axios.post('/api/upload_file', formData
         ).then(res => { 
             if (res.status === 200) {
-                alert("response 200 OK");
+                alert("Assignment submitted");
             }
             else {
                 alert("Error : ");
@@ -75,7 +71,7 @@ const Assignments = (props) => {
                         <td>
                             <Form onSubmit={onSubmit}>
                                 <Form.Group className="mb-3" controlId="formBasicFile">
-                                <Form.Control type="file"
+                                <Form.Control type="file" name="file" id="file" enctype="multipart/form-data"
                                       onChange={(e) => onInputChange("Assignment 2", e)} required/>
                                 </Form.Group>
                                 <Button variant="primary" type="submit">
@@ -91,7 +87,7 @@ const Assignments = (props) => {
                         <td>
                             <Form onSubmit={onSubmit}>
                                 <Form.Group className="mb-3" controlId="formBasicFile">
-                                <Form.Control type="file"
+                                <Form.Control type="file" name="file" id="file" enctype="multipart/form-data"
                                       onChange={(e) => onInputChange("Assignment 3", e)} required/>
                                 </Form.Group>
                                 <Button variant="primary" type="submit">
