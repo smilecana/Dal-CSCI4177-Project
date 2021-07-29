@@ -7,7 +7,7 @@ const Assignment = require("../models/Assignment");
 //Define business logic for routes
 module.exports = {
   findAll: function (req, res) {
-    Assignment.find()
+    Assignment.find(req.params.id)
       .then((assignments) => res.json(assignments))
       .catch((err) => console.log(err));
   },

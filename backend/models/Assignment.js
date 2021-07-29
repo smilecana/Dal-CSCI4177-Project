@@ -17,6 +17,10 @@ const assignmentSchema = new Schema({
         type: String,
         required: true
     },
+    id: {
+        type: String,
+        required: true
+    },
     grade:{
         type: String,
         required: true

@@ -11,19 +11,16 @@ const upload = multer({  });
 router.post("/upload_file", upload.single('file'), (req, res) => {
   try {
 
-    console.log(req.file);
+    console.log(req.body.id);
     console.log(req.body.fileName);
 
     const assignmentNumber = req.body.assignmentNum;
     const fileName = req.body.fileName;
     const file = req.file;
-
-    console.log(assignmentNumber);
-    console.log(fileName);
-    console.log(file);
+    const id = req.body.id;
 
     //Check input is not empty
-    if (!fileName || !assignmentNumber) {
+    if (!fileName || !assignmentNumber || !id) {
       return res.status(400).send({
         message: "Missing body",
         success: false,
@@ -35,7 +32,8 @@ router.post("/upload_file", upload.single('file'), (req, res) => {
     newAssignment.assignmentNum = assignmentNumber;
     newAssignment.file = file;
     newAssignment.fileName = fileName;
-    newAssignment.grade = "0";
+    newAssignment.id = id;
+    newAssignment.grade = "-";
 
     newAssignment
       .save()
@@ -65,8 +63,9 @@ router.post("/upload_file", upload.single('file'), (req, res) => {
 
 router.get("/retrieve_assignments", (req, res) => {
   try {
-    Assignment.find()
-      .exec()
+    console.log(req.query.id);
+    let id = req.query.id;
+    Assignment.find({id: id})
       .then((Assignment) => {
         if (!Assignment.length) {
           return res.status(404).send({

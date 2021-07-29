@@ -1,7 +1,7 @@
 //Brady MacDonald
 
 import axios from 'axios';
-import React, {useState} from 'react';
+import React from 'react';
 import {Button, Container, Form,} from 'react-bootstrap';
 import {Link} from "react-router-dom";
 import '../assets/css/Assignments.css'
@@ -9,8 +9,9 @@ import '../assets/css/Assignments.css'
 const Assignments = (props) => {
     
     const formData = new FormData();
-    
+
     const onInputChange = (inputNum, e) => {
+        formData.append("id", props.data.id);
         formData.append("file", e.target.files[0]);
         formData.append("fileName", e.target.files[0].name);
         formData.append("assignmentNum", inputNum);
@@ -53,7 +54,6 @@ const Assignments = (props) => {
                             <th scope="col">Assignment</th>
                             <th scope="col">Submission</th>
                             <th scope="col">Due Date</th>
-                            <th scope="col">Grade</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -71,7 +71,6 @@ const Assignments = (props) => {
                             </Form>
                         </td> 
                         <td>July-30th</td>
-                        <td>-</td>
                     </tr>
                     <tr>
                         <td>Assignment 2</td>
@@ -87,7 +86,6 @@ const Assignments = (props) => {
                             </Form>
                         </td> 
                         <td>August-4th</td>
-                        <td>-</td>
                     </tr>
                     <tr>
                         <td>Assignment 3</td>
@@ -103,7 +101,6 @@ const Assignments = (props) => {
                             </Form>
                         </td> 
                         <td>August-6th</td>
-                        <td>-</td>
                     </tr>
                     </tbody>
                 </table>

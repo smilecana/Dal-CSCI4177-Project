@@ -8,7 +8,11 @@ const Grades = (props) => {
   const [assignment, setAssignment] = useState([]);
 
   useEffect(() => {
-    axios.get("/api/retrieve_assignments").then((response) => {
+    axios.get("/api/retrieve_assignments", {
+      params: {
+        id: props.data.id
+      }
+    }).then((response) => {
       const info = response.data;
 
       console.log(info);
@@ -35,12 +39,14 @@ const Grades = (props) => {
         <thead>
           <tr>
             <th scope="col">Assignment</th>
+            <th scope="col">Submission</th>
             <th scope="col">Grade</th>
           </tr>
         </thead>
         <tbody>
           {assignment.map((item) => (
             <tr>
+              <td>{item.assignmentNum}</td>
               <td>{item.fileName}</td>
               <td>{item.grade}</td>
             </tr>
