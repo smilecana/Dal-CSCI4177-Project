@@ -4,6 +4,8 @@ import Button from "react-bootstrap/Button";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import axios from "axios";
+import Nav from "react-bootstrap/Nav";
+import { Link } from "react-router-dom";
 
 const Home = (props) => {
   const [user, setUser] = useState("");
@@ -39,7 +41,9 @@ const Home = (props) => {
                   Calendar
                 </Card.Title>
                 <Card.Text>Access your calendar here!</Card.Text>
-                <Button variant="outline-primary">Go to Calendar</Button>
+                <Button variant="outline-primary" as={Link} to={"/calendar"}>
+                  Go to Calendar
+                </Button>
               </Card.Body>
             </Card>
           </Col>
@@ -53,7 +57,9 @@ const Home = (props) => {
                   Assignments
                 </Card.Title>
                 <Card.Text>Your assignments are here. Don't be late!</Card.Text>
-                <Button variant="outline-primary">Go to Assingments</Button>
+                <Button variant="outline-primary" as={Link} to={"/assignments"}>
+                  Go to Assingments
+                </Button>
               </Card.Body>
             </Card>
           </Col>
@@ -67,7 +73,9 @@ const Home = (props) => {
                   Grades
                 </Card.Title>
                 <Card.Text>You can see your grades here!</Card.Text>
-                <Button variant="outline-primary">Go to Grades</Button>
+                <Button variant="outline-primary" as={Link} to={"/grades"}>
+                  Go to Grades
+                </Button>
               </Card.Body>
             </Card>
           </Col>
@@ -83,7 +91,9 @@ const Home = (props) => {
                 <Card.Text>
                   Here you can see and edit your profile. Keep it fresh!
                 </Card.Text>
-                <Button variant="outline-primary">Go to Profile</Button>
+                <Button variant="outline-primary" as={Link} to={"/user/" + props.data.id}>
+                  Go to Profile
+                </Button>
               </Card.Body>
             </Card>
           </Col>
