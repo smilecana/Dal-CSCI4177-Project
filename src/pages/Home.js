@@ -1,44 +1,105 @@
-import {
-    Button,
-    Card,
-    CardBody,
-    CardGroup,
-    Col,
-    Container,
-    Row
-} from 'reactstrap';
-import {Link} from 'react-router-dom';
-import React from 'react';
+import { Col, Container, Row } from "react-bootstrap";
+import Card from "react-bootstrap/Card";
+import Button from "react-bootstrap/Button";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router";
+import axios from "axios";
+import Nav from "react-bootstrap/Nav";
+import { Link } from "react-router-dom";
 
-const Home = () => {
-    return (
-        <>
-            <Container>
-                <Row className="justify-content-center">
-                    <Col md="8">
-                        <CardGroup>
-                            <Card className="text-white bg-primary py-5 d-md-down-none" style={{width: '44%'}}>
-                                <CardBody className="text-center">
-                                    <div>
-                                        <Link to="/register">
-                                            <Button color="primary" className="mt-3" active
-                                                    tabIndex={0}>Register</Button>
-                                        </Link> &nbsp;&nbsp;
-                                        <Link to="/assignments">
-                                            <Button color="primary" className="mt-3" active
-                                                    tabIndex={1}>Assignments</Button>
-                                        </Link> &nbsp;&nbsp;
-                                        <Link to="/grades">
-                                            <Button color="primary" className="mt-3" active tabIndex={1}>Grades</Button>
-                                        </Link> &nbsp;&nbsp;
-                                    </div>
-                                </CardBody>
-                            </Card>
-                        </CardGroup>
-                    </Col>
-                </Row>
-            </Container>
-        </>
-    )
+const Home = (props) => {
+  const [user, setUser] = useState("");
+  useEffect(() => {
+    axios.get(`/api/user/${props.data.id}`).then((response) => {
+      return setUser(response.data.users);
+    });
+  }, [props, user]);
+
+  return (
+    <>
+      <Container
+        style={{
+          backgroundColor: "#ffffff",
+          opacity: "1",
+          backgroundImage:
+            "repeating-radial-gradient( circle at 0 0, transparent 0, #ffffff 17px ), repeating-linear-gradient( #f4f6fe55, #f4f6fe )",
+          height: "100vh",
+          maxWidth: "100%",
+        }}>
+        <Row>
+          <h1 style={{ color: "" }} className="py-2 px-4">
+            Hello, {props.data.email}
+          </h1>
+        </Row>
+        <Row xs={1} md={2} lg={4} className="align-items-center">
+          <Col>
+            <Card className="my-1">
+              <Card.Body>
+                <Card.Title
+                  className="p-2 rounded"
+                  style={{ backgroundColor: "#0d6efd", color: "white" }}>
+                  Calendar
+                </Card.Title>
+                <Card.Text>Access your calendar here!</Card.Text>
+                <Button variant="outline-primary" as={Link} to={"/calendar"}>
+                  Go to Calendar
+                </Button>
+              </Card.Body>
+            </Card>
+          </Col>
+          <Col>
+            {" "}
+            <Card className="my-1">
+              <Card.Body>
+                <Card.Title
+                  className="p-2 rounded"
+                  style={{ backgroundColor: "#0d6efd", color: "white" }}>
+                  Assignments
+                </Card.Title>
+                <Card.Text>Your assignments are here. Don't be late!</Card.Text>
+                <Button variant="outline-primary" as={Link} to={"/assignments"}>
+                  Go to Assingments
+                </Button>
+              </Card.Body>
+            </Card>
+          </Col>
+          <Col>
+            {" "}
+            <Card className="my-1">
+              <Card.Body>
+                <Card.Title
+                  className="p-2 rounded"
+                  style={{ backgroundColor: "#0d6efd", color: "white" }}>
+                  Grades
+                </Card.Title>
+                <Card.Text>You can see your grades here!</Card.Text>
+                <Button variant="outline-primary" as={Link} to={"/grades"}>
+                  Go to Grades
+                </Button>
+              </Card.Body>
+            </Card>
+          </Col>
+          <Col>
+            {" "}
+            <Card className="my-1">
+              <Card.Body>
+                <Card.Title
+                  className="p-2 rounded"
+                  style={{ backgroundColor: "#0d6efd", color: "white" }}>
+                  Profile
+                </Card.Title>
+                <Card.Text>
+                  Here you can see and edit your profile. Keep it fresh!
+                </Card.Text>
+                <Button variant="outline-primary" as={Link} to={"/user/" + props.data.id}>
+                  Go to Profile
+                </Button>
+              </Card.Body>
+            </Card>
+          </Col>
+        </Row>
+      </Container>
+    </>
+  );
 };
-export default Home
+export default Home;

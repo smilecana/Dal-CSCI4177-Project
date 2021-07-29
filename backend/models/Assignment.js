@@ -10,10 +10,14 @@ const assignmentSchema = new Schema({
         required: true
     },
     file: {
-        type: String,
+        type: Object,
         required: true
     },
     fileName:{
+        type: String,
+        required: true
+    },
+    id: {
         type: String,
         required: true
     },

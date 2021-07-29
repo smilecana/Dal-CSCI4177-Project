@@ -1,0 +1,11 @@
+.wrap-users{
+    width: 100%;
+}
+.btn-group-users{
+    text-align: right;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.danger {
+    color: #F90101FF;
+}

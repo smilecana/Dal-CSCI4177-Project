@@ -2,39 +2,30 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../models/User');
+const data = require('../dump');
+require("mongoose");
 
-
-//All user list
-
-router.get('/', (req, res) => {
-    try {
-        let email = req.body;
-        User.find({email: email})
-            .then(user => {
-                if (!user) {
-                    return res.status(404).send({
-                        success: false,
-                        message: "No user found",
-                    })
-                }
-                return res.send({
-                    success: true,
-                    "user": user
+//find user by Email
+router.get('/user', (req, res) => {
+    let email = req.body;
+    User.find({email: email})
+        .then(user => {
+            if (!user) {
+                return res.status(404).send({
+                    success: false,
+                    message: "No user found",
                 })
+            }
+            return res.send({
+                success: true,
+                "user": user
             })
-    } catch (e) {
-        console.error(e);
-        return res.status(500).json({
-            success: false,
-            message: "Internal server error",
         })
-    }
 } )
 //find user by Id
-
-router.get('/:userId', (req, res) => {
+router.get('/user/:id', (req, res) => {
     try {
-        User.findById(req.params['userId'])
+        User.findById(req.params['id'])
             .then(users => {
                 if (!users) {
                     return res.status(404).send({
@@ -64,9 +55,9 @@ router.get('/:userId', (req, res) => {
     }
 })
 //Modified User
-router.put('/:userId', (req, res) => {
+router.put('/user/:id', (req, res) => {
     try {
-        const {userName, bio,github,linkedin,web} = req.body;
+        const {userName, bio,github,linkedin,web, type} = req.body;
         if (!userName) {
             return res.status(400).send({
                 message: "Missing body params or check the params keys",
@@ -78,9 +69,10 @@ router.put('/:userId', (req, res) => {
             bio: bio,
             github: github,
             linkedin: github,
-            web: web
+            web: web,
+            type: type
         };
-        User.findByIdAndUpdate(req.params['userId'], {$set: updateUser}, function (err, model) {
+        User.findByIdAndUpdate(req.params['id'], {$set: updateUser}, function (err, model) {
             if (err) {
                 return res.status(500).send({
                     success: false,
@@ -105,9 +97,9 @@ router.put('/:userId', (req, res) => {
     }
 })
 // Delete User
-router.delete('/:userId', (req, res) => {
+router.delete('/user/:id', (req, res) => {
     try {
-        User.findByIdAndRemove(req.params['userId'])
+        User.findByIdAndRemove(req.params['id'])
             .then(() => {
                 return res.status(200).send({
                     success: true,
