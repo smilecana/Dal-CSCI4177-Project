@@ -15,8 +15,6 @@
 * [Brady MacDonald](brady.macdonald@dal.ca) - *(contributor)*
 * [Ryan McInroy](ry624227@dal.ca) - *(contributor)*
 
-# Assignment3
-##UserProfileManagement
 
 # Getting Started with Create React App
 
