@@ -9,7 +9,7 @@
 
 ## Authors
 
-* [HanaPark](hn946002@dal.ca) - *(contributor)*
+* [HanaPark](hn946002@dal.ca / hana.park88@hotmail.com) - *(contributor)*
 * [Ty Fetinko](ty667216@dal.ca) - *(contributor)*
 * [Aref Abdipoor](aref.adbi@dal.ca) - *(contributor)*
 * [Brady MacDonald](brady.macdonald@dal.ca) - *(contributor)*
