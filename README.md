@@ -1,5 +1,5 @@
 
-# CSCI4177 Project
+# CSCI4177 Project [Learning Management System]
 
 * *Date Created*: 24 May 2021
 * *Last Modification Date*: 21 July 2021
