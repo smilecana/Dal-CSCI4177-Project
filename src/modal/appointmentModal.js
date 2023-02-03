@@ -2,7 +2,7 @@
 import axios from 'axios';
 import { useState } from 'react';
 import './modal.css';
-import { Button, Container, Form } from "react-bootstrap";
+import { Form } from "react-bootstrap";
 
 const Modal = ({ handleClose, show, children, onEventAdded }) => {
   //css will depend on if the modal is showing or not
@@ -27,13 +27,7 @@ const Modal = ({ handleClose, show, children, onEventAdded }) => {
       }
     })
   }
-  //for when the button is clicked. Console log shows values.
-  function handleClick(event) {
-    event.preventDefault();
-    //In the console we can now see the values that are ready to be sent off.
-    console.log(input);
-  }
-
+  
   //submitting the form
   const onSubmit = (event) => {
     event.preventDefault();

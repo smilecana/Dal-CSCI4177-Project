@@ -12,13 +12,12 @@ const PageHeader = (props) => {
       window.location = "/";
     }
   }
-
   const [user, setUser] = useState("");
   useEffect(() => {
     axios.get(`/api/user/${props.data.id}`).then((response) => {
       return setUser(response.data.users);
     });
-  }, [props, user]);
+  }, [props.data.id]);
   return (
     <Navbar
       sticky="top"

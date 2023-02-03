@@ -10,10 +10,6 @@ const upload = multer({  });
 //Add file
 router.post("/upload_file", upload.single('file'), (req, res) => {
   try {
-
-    console.log(req.body.id);
-    console.log(req.body.fileName);
-
     const assignmentNumber = req.body.assignmentNum;
     const fileName = req.body.fileName;
     const file = req.file;

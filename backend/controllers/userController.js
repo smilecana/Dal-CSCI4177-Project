@@ -25,10 +25,4 @@ module.exports = {
       .then((book) => res.json(book))
       .catch((err) => res.status(422).json(err));
   },
-  // remove: function (req, res) {
-  //     User.findById({ _id: req.params.id })
-  //         .then(book => book.remove())
-  //         .then(allbooks => res.json(allbooks))
-  //         .catch(err => res.status(422).json(err));
-  // }
 };

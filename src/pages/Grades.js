@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
-import { Button, Container, Form } from "react-bootstrap";
+import { Button, Container } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import "../assets/css/Grades.css";
 
@@ -14,8 +14,6 @@ const Grades = (props) => {
       }
     }).then((response) => {
       const info = response.data;
-
-      console.log(info);
       return setAssignment(info.Assignment);
     });
   }, []);
@@ -25,7 +23,6 @@ const Grades = (props) => {
       style={{
         backgroundColor: "#ffffff",
         opacity: "1",
-        backgroundImage: "repeating-radial-gradient( circle at 0 0, transparent 0, #ffffff 17px ), repeating-linear-gradient( #f4f6fe55, #f4f6fe )",
         height: "100vh",
         maxWidth: "100%",
       }}>
@@ -35,7 +32,7 @@ const Grades = (props) => {
         </Button>
       </Link>
 
-      <table class="table table-striped">
+      <table className="table table-striped">
         <thead>
           <tr>
             <th scope="col">Assignment</th>
@@ -44,13 +41,13 @@ const Grades = (props) => {
           </tr>
         </thead>
         <tbody>
-          {assignment.map((item) => (
+          {assignment && assignment.length > 0 ? (assignment.map((item) => (
             <tr>
               <td>{item.assignmentNum}</td>
               <td>{item.fileName}</td>
               <td>{item.grade}</td>
             </tr>
-          ))}
+          ))):(<tr><td colSpan={3}>No data</td></tr>)}
         </tbody>
       </table>
     </Container>

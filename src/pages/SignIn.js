@@ -47,6 +47,7 @@ const SignIn = () => {
         }
       })
       .catch((e) => {
+        console.log(e);
         alert(e.response.data.error);
       });
   };

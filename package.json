@@ -1,5 +1,5 @@
 {
-  "name": "4177",
+  "name": "Learning Management System",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -29,15 +29,15 @@
     "web-vitals": "^1.0.1"
   },
   "scripts": {
-    "client": "react-scripts start",
     "server": "cd backend && nodemon server.js",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "client": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "start": "node backend/server.js",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install && npm run build"
+    "start": "node backend/server.js"
   },
+
   "eslintConfig": {
     "extends": [
       "react-app",
@@ -56,11 +56,11 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://localhost:5000/",
   "devDependencies": {
     "nodemon": "^2.0.7"
   },
   "engines": {
     "node": "10.16.0"
-  }
+  },  
+  "proxy": "http://localhost:5000/"
 }

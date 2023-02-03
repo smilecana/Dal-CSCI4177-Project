@@ -2,9 +2,7 @@ import { Col, Container, Row } from "react-bootstrap";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router";
 import axios from "axios";
-import Nav from "react-bootstrap/Nav";
 import { Link } from "react-router-dom";
 
 const Home = (props) => {
@@ -13,7 +11,7 @@ const Home = (props) => {
     axios.get(`/api/user/${props.data.id}`).then((response) => {
       return setUser(response.data.users);
     });
-  }, [props, user]);
+  }, [props.data.id]);
 
   return (
     <>
