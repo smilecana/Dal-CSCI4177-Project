@@ -28,13 +28,6 @@ jobs:
           npm install
           npm run build
 
-      - name: server start
-        run: |
-          npm run start
-        env: 
-          MONGODB_CONNECTION_DEV_STRING: ${{secrets.MONGODB_CONNECTION_DEV_STRING}}
-          PUBLIC_TOKEN_KEY: ${{secrets.PUBLIC_TOKEN_KEY}}
-
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
         with:
