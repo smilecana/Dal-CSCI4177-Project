@@ -25,6 +25,7 @@ jobs:
         env:
           CI: false
         run: |
+          rm -rf node_modules
           npm install --production
           npm run build
 
