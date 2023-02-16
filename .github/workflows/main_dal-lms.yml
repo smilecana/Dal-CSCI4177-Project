@@ -10,34 +10,6 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v2
-
-      - name: Set up Node.js version
-        uses: actions/setup-node@v1
-        with:
-          node-version: '16.x'
-
-      - name: client install
-        env:
-          CI: false
-        run: |
-          npm run client-install
-          npm run client-build
-
-      - name: server install
-        run: |
-          npm run server-install
-
-      - name: Upload artifact for deployment job
-        uses: actions/upload-artifact@v2
-        with:
-          name: node-app
-          path: .
-
   deploy:
     runs-on: ubuntu-latest
     environment:
@@ -45,10 +17,10 @@ jobs:
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
 
     steps:
-      -name: Login to Azure
+      - name: Login to Azure
         uses: azure/login@v1
-        with: 
-          creds: $ {{ secrets.AZURE_CREDENTIALS }}
+        with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
 
       - name: Download artifact from build job
         uses: actions/download-artifact@v2
