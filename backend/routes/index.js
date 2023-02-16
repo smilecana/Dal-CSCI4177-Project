@@ -10,6 +10,12 @@ const eventRouters = require("./events");
 const bcrypt = require("bcryptjs");
 const jsonwebtoken = require("jsonwebtoken");
 
+router.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+
 router.use("/api", userRoutes);
 router.use("/api", fileRouters);
 router.use("/api", eventRouters);
@@ -18,9 +24,10 @@ router.use("/api/admin", adminRouters);
 
 
 //login
-router.post('/login', async (req, res) => {
+router.post('/api/login', async (req, res) => {
   try {
     const user = await User.findOne({email: req.body.email})
+    if (!user) return res.status(401).json({ error: "User does not exist"})
     if (user) {
       const validPassword = await bcrypt.compare(req.body.password, user.password);
       if (validPassword) {
@@ -34,10 +41,6 @@ router.post('/login', async (req, res) => {
           error: "login failed"
         })
       }
-    } else {
-      res.status(401).json({
-        error: "User does not exist"
-      })
     }
   } catch (e) {
     res.status(500).json({
@@ -47,7 +50,7 @@ router.post('/login', async (req, res) => {
   }
 })
 //logout
-router.post("/logout", (req, res) => {
+router.post("/api/logout", (req, res) => {
   try {
     res.status(200).json({
       success: true,

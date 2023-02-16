@@ -5,12 +5,13 @@ const app = express();
 const routes = require("./routes");
 const port = process.env.PORT || 5000;
 const path = require('path');
+const cors = require('cors');
 
 //middleware
 app.use(bodyParser.json());
 app.use(express.json())
 app.use(routes);
-
+app.use(cors())
 // Serve up static assets (usually on heroku)
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("build"));

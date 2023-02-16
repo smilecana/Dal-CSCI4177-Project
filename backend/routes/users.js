@@ -6,9 +6,8 @@ const data = require('../dump');
 require("mongoose");
 
 //find user by Email
-router.get('/user', (req, res) => {
-    let email = req.body;
-    User.find({email: email})
+router.post('/user', (req, res) => {
+    User.findOne({email: req.body.email})
         .then(user => {
             if (!user) {
                 return res.status(404).send({
@@ -21,11 +20,15 @@ router.get('/user', (req, res) => {
                 "user": user
             })
         })
+        .catch(e => {
+            console.log(e);
+        })
 } )
 //find user by Id
 router.get('/user/:id', (req, res) => {
     try {
         User.findById(req.params['id'])
+            .select("-password")
             .then(users => {
                 if (!users) {
                     return res.status(404).send({
@@ -57,7 +60,7 @@ router.get('/user/:id', (req, res) => {
 //Modified User
 router.put('/user/:id', (req, res) => {
     try {
-        const {userName, bio,github,linkedin,web, type} = req.body;
+        const {userName, bio, github, linkedin, web, type} = req.body;
         if (!userName) {
             return res.status(400).send({
                 message: "Missing body params or check the params keys",
@@ -68,7 +71,7 @@ router.put('/user/:id', (req, res) => {
             userName: userName,
             bio: bio,
             github: github,
-            linkedin: github,
+            linkedin: linkedin,
             web: web,
             type: type
         };

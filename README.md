@@ -2,9 +2,9 @@
 # CSCI4177 Project [Learning Management System]
 
 * *Date Created*: 24 May 2021
-* *Last Modification Date*: 21 July 2021
-* *URL*: https://github.com/Aref19a/4177-project
-* Heroku Link : https://csci4177-project.herokuapp.com/
+* *Last Modification Date*: 08 Feb 2023
+* *URL*: https://github.com/smilecana/Dal-CSCI4177-Project
+* azure Link : https://dal-lms.azurewebsites.net
 
 
 ## Authors
@@ -41,12 +41,14 @@ $ git clone https://github.com/Aref19a/4177-project.git
 ### Running Your Application
 Move to the repository folder
 ```bash
-$ cd CSCI-4177-Project
+$ cd CSCI4177
 ```
 
 Install your application using npm:
 ```bash
 $ npm install
+$ npm run server-install
+$ npm run client-install
 ```
 
 Run your application using npm:
@@ -57,7 +59,7 @@ $ npm run dev
 
 By clicking the button below you can signup for Heroku and deploy a working copy of MEANJS to the cloud without having to do the steps above.
 
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://csci4177-project.herokuapp.com/)
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)]()
 
 ## Files Created or Edited 
 ### Brady MacDonald

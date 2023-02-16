@@ -2,7 +2,6 @@
 
 const router = require("express").Router();
 const Assignment = require("../models/Assignment");
-const mongoose = require("mongoose");
 
 const multer = require('multer');
 const upload = multer({  });
@@ -41,7 +40,6 @@ router.post("/upload_file", upload.single('file'), (req, res) => {
       )
       .catch((e) => {
         console.error(e);
-
         return res.status(500).send({
           success: false,
           message: "Something went wrong.",
@@ -59,7 +57,6 @@ router.post("/upload_file", upload.single('file'), (req, res) => {
 
 router.get("/retrieve_assignments", (req, res) => {
   try {
-    console.log(req.query.id);
     let id = req.query.id;
     Assignment.find({id: id})
       .then((Assignment) => {
