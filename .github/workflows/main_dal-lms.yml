@@ -21,13 +21,16 @@ jobs:
         with:
           node-version: '16.x'
 
-      - name: npm install and build
+      - name: client install
         env:
           CI: false
         run: |
-          rm -rf node_modules
-          npm install --production
-          npm run build
+          npm run client-install
+          npm run client-build
+
+      - name: server install
+        run: |
+          npm run server-install
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2

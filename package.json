@@ -7,8 +7,8 @@
     "dev_client": "cd client && npm run start",
     "dev": "concurrently \"npm run dev_server\" \"npm run dev_client\"",
     "server-install": "cd backend && npm install",
-    "client-install": "cd frontend && npm install",
-    "client-build": "cd frontend && npm run build",
+    "client-install": "cd client && npm install",
+    "client-build": "cd client && npm run build",
     "start": "cd backend && npm start"
   },
   "eslintConfig": {
