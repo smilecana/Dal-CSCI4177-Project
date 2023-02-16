@@ -21,16 +21,11 @@ jobs:
         with:
           node-version: '16.x'
 
-      - name: client install
-        env:
-          CI: false
+      - name: npm install, build, and test
         run: |
-          npm run client-install
-          npm run client-build
-
-      - name: server install
-        run: |
-          npm run server-install
+          npm install
+          npm run build --if-present
+          npm run test --if-present
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
@@ -57,5 +52,5 @@ jobs:
         with:
           app-name: 'dal-lms'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_C0CF1DF96CBD419586DA241720605722 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_4995A7C722B643D9A31A05FC834445AF }}
           package: .
