@@ -2,7 +2,7 @@
   "name": "lms-backend",
   "version": "1.0.0",
   "description": "lms-server",
-  "main": "database.js",
+  "main": "server.js",
   "scripts": {
     "start": "node server.js",
     "dev": "nodemon server.js"
