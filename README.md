@@ -1,10 +1,10 @@
 
-# CSCI4177 Project [Learning Management System]
+# Learning Management System Platform
 
 * *Date Created*: 24 May 2021
 * *Last Modification Date*: 08 Feb 2023
-* *URL*: https://github.com/smilecana/Dal-CSCI4177-Project
-* azure Link : https://dal-lms.azurewebsites.net
+* *URL*: https://github.com/smilecana/lms-platform.git
+* *Demo* : https://dal-lms.azurewebsites.net
 
 
 ## Authors
